@@ -35,12 +35,14 @@ public class CalculatorUI implements ActionListener {
 		text = new JTextArea(2, 25);
 
 		JPanel numberPanel = CreatePanel.createNumberPanel();
+		numberPanel.setLayout(new GridLayout(4, 3));
 		JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
 		JPanel trigPanel = CreatePanel.createTrigPanel();
 		JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
 		JPanel cancelPanel = CreatePanel.createCancelPanel();
 
-		mainPanel = new JPanel(new GridLayout(2, 2));
+		mainPanel = new JPanel(new FlowLayout());
+		mainPanel.add(text);
 
 		mainPanel.add(numberPanel);
 		mainPanel.add(primitiveOperationsPanel);
@@ -58,6 +60,8 @@ public class CalculatorUI implements ActionListener {
 		frame.setSize(300, 340);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.add(mainPanel);
+
+
 
 		for (int i = 0; i < 10; i++) {
             CreatePanel.jButtons[i].addActionListener(this);
