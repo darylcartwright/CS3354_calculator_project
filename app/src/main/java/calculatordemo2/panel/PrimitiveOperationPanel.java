@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 import calculatordemo2.button.CreateButton;
 
 public class PrimitiveOperationPanel extends JPanel {
-    public CreateButton div, mult, sub, add, equals;
+    public CreateButton div, mult, sub, add, equal;
 
     public PrimitiveOperationPanel() {
         setLayout(new FlowLayout());
@@ -14,12 +14,12 @@ public class PrimitiveOperationPanel extends JPanel {
         mult = new CreateButton("*");
         sub = new CreateButton("-");
         add = new CreateButton("+");
-        equals = new CreateButton("=");
+        equal = new CreateButton("=");
 
         add(div);
         add(mult);
         add(sub);
         add(add);
-        add(equals);
+        add(equal);
     }
 }
