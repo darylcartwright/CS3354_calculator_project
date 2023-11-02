@@ -1,5 +1,7 @@
 package calculatordemo2.panel;
 
-public class BasicFunctionPanel {
+import javax.swing.JPanel;
+
+public class BasicFunctionPanel extends JPanel {
     
 }

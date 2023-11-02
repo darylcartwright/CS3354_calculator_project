@@ -1,5 +1,8 @@
 package calculatordemo2.panel;
 
-public class ButtonPanel {
+import javax.swing.JPanel;
+import calculatordemo2.button.*;
+
+public class ButtonPanel extends JPanel {
     
 }

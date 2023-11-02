@@ -1,5 +1,7 @@
 package calculatordemo2.panel;
 
-public class TrigPanel {
+import javax.swing.JPanel;
+
+public class TrigPanel extends JPanel {
     
 }
