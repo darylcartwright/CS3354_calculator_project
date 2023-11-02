@@ -38,6 +38,7 @@ public class CalculatorUI implements ActionListener {
 		JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
 		JPanel trigPanel = CreatePanel.createTrigPanel();
 		JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
+		JPanel cancelPanel = CreatePanel.createCancelPanel();
 
 		mainPanel = new JPanel(new GridLayout(2, 2));
 
@@ -45,6 +46,7 @@ public class CalculatorUI implements ActionListener {
 		mainPanel.add(primitiveOperationsPanel);
 		mainPanel.add(trigPanel);
 		mainPanel.add(basicFunctionPanel);
+		mainPanel.add(cancelPanel);
 
 		calc = new Calculator();
 	}
@@ -57,26 +59,23 @@ public class CalculatorUI implements ActionListener {
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.add(mainPanel);
 
-		panel.add(text);
 		for (int i = 0; i < 10; i++) {
-			panel.add(jButtons[i]);
-			jButtons[i].addActionListener(this);
-		}
-		// add operand buttons
+            CreatePanel.jButtons[i].addActionListener(this);
+        }
 
-		// add event listeners
-		add.addActionListener(this);
-		sub.addActionListener(this);
-		mult.addActionListener(this);
-		div.addActionListener(this);
-		sqr.addActionListener(this);
-		sqrRt.addActionListener(this);
-		inverse.addActionListener(this);
-		cos.addActionListener(this);
-		sin.addActionListener(this);
-		tan.addActionListener(this);
-		equal.addActionListener(this);
-		cancel.addActionListener(this);
+        CreatePanel.add.addActionListener(this);
+        CreatePanel.sub.addActionListener(this);
+        CreatePanel.mult.addActionListener(this);
+        CreatePanel.div.addActionListener(this);
+        CreatePanel.sqr.addActionListener(this);
+        CreatePanel.sqrRt.addActionListener(this);
+        CreatePanel.inverse.addActionListener(this);
+        CreatePanel.cos.addActionListener(this);
+        CreatePanel.sin.addActionListener(this);
+        CreatePanel.tan.addActionListener(this);
+        CreatePanel.equal.addActionListener(this);
+        CreatePanel.cancel.addActionListener(this);
+
 
 		frame.setVisible(true);
 	}
@@ -89,54 +88,55 @@ public class CalculatorUI implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		final Object source = e.getSource();
 		// check 0-9 and update textfield
-		for (int i = 0; i < 10; i++) {
-			if (source == jButtons[i]) {
-				text.replaceSelection(buttonValue[i]);
-				return;
-			}
-		}
-		if (source == add) {
+
+		 for (int i = 0; i < 10; i++) {
+			if (source == CreatePanel.jButtons[i]) {
+                text.replaceSelection(CreatePanel.buttonValue[i]);
+                return;
+            }
+        }
+		if (source == CreatePanel.add) {
 			writer(calc.twoOpCaller(Calculator.twoOperator.add, reader()));
 		}
-		if (source == sub) {
+		if (source == CreatePanel.sub) {
 			writer(calc.twoOpCaller(Calculator.twoOperator.subtract, reader()));
 		}
-		if (source == mult) {
+		if (source == CreatePanel.mult) {
 			writer(calc.twoOpCaller(Calculator.twoOperator.multiply,
 					reader()));
 		}
-		if (source == div) {
+		if (source == CreatePanel.div) {
 			writer(calc.twoOpCaller(Calculator.twoOperator.divide, reader()));
 		}
-		if (source == sqr) {
+		if (source == CreatePanel.sqr) {
 			writer(calc.calcScience(Calculator.singleOperator.square,
 					reader()));
 		}
-		if (source == sqrRt) {
+		if (source == CreatePanel.sqrRt) {
 			writer(calc.calcScience(Calculator.singleOperator.squareRoot,
 					reader()));
 		}
-		if (source == inverse) {
+		if (source == CreatePanel.inverse) {
 			writer(calc.calcScience(
 					Calculator.singleOperator.oneDevidedBy, reader()));
 		}
-		if (source == cos) {
+		if (source == CreatePanel.cos) {
 			writer(calc.calcScience(Calculator.singleOperator.cos,
 					reader()));
 		}
-		if (source == sin) {
+		if (source == CreatePanel.sin) {
 			writer(calc.calcScience(Calculator.singleOperator.sin,
 					reader()));
 		}
 
-		if (source == tan) {
+		if (source == CreatePanel.tan) {
 			writer(calc.calcScience(Calculator.singleOperator.tan,
 					reader()));
 		}
-		if (source == equal) {
+		if (source == CreatePanel.equal) {
 			writer(calc.calculateEqual(reader()));
 		}
-		if (source == cancel) {
+		if (source == CreatePanel.cancel) {
 			writer(calc.reset());
 		}
 		// for easy continued calculations/copy
