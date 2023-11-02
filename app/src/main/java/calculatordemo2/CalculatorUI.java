@@ -1,6 +1,7 @@
 package calculatordemo2;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import calculatordemo2.panel.CreatePanel;
+
+
 /**
  * CalculatorUI class that creates and adds buttons, event handling for the buttons, and calls calculator
  * methods and functions for logic when necessary
@@ -18,11 +22,9 @@ import javax.swing.JTextArea;
 
 public class CalculatorUI implements ActionListener {
 	private final JFrame frame;
-	private final JPanel panel;
+    private final JPanel mainPanel;
+    private final Calculator calc;
 	private final JTextArea text;
-	private final JButton jButtons[], add, sub, mult, div, equal, cancel, sqrRt, sqr, inverse, cos, sin, tan;
-	private final String[] buttonValue = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-	private final Calculator calc;
 
 	/**
 	 * The main top level GUI of the calculator and it's frame, button, and text area for # display
@@ -30,26 +32,19 @@ public class CalculatorUI implements ActionListener {
 	public CalculatorUI() {
 		frame = new JFrame("Calculator");
 		frame.setResizable(true);
-		panel = new JPanel(new FlowLayout());
 		text = new JTextArea(2, 25);
-		jButtons = new JButton[10];
 
-		for (int i = 0; i < 10; i++) {
-			jButtons[i] = new JButton(String.valueOf(i));
-		}
+		JPanel numberPanel = CreatePanel.createNumberPanel();
+		JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
+		JPanel trigPanel = CreatePanel.createTrigPanel();
+		JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
 
-		add = new JButton("+");
-		sub = new JButton("-");
-		mult = new JButton("*");
-		div = new JButton("/");
-		equal = new JButton("=");
-		sqrRt = new JButton("√");
-		sqr = new JButton("x*x");
-		inverse = new JButton("1/x");
-		cos = new JButton("Cos");
-		sin = new JButton("Sin");
-		tan = new JButton("Tan");
-		cancel = new JButton("C");
+		mainPanel = new JPanel(new GridLayout(2, 2));
+
+		mainPanel.add(numberPanel);
+		mainPanel.add(primitiveOperationsPanel);
+		mainPanel.add(trigPanel);
+		mainPanel.add(basicFunctionPanel);
 
 		calc = new Calculator();
 	}
@@ -60,7 +55,7 @@ public class CalculatorUI implements ActionListener {
 	public void init() {
 		frame.setSize(300, 340);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		frame.add(panel);
+		frame.add(mainPanel);
 
 		panel.add(text);
 		for (int i = 0; i < 10; i++) {
@@ -68,18 +63,7 @@ public class CalculatorUI implements ActionListener {
 			jButtons[i].addActionListener(this);
 		}
 		// add operand buttons
-		panel.add(add);
-		panel.add(sub);
-		panel.add(mult);
-		panel.add(div);
-		panel.add(sqr);
-		panel.add(sqrRt);
-		panel.add(inverse);
-		panel.add(cos);
-		panel.add(sin);
-		panel.add(tan);
-		panel.add(equal);
-		panel.add(cancel);
+
 		// add event listeners
 		add.addActionListener(this);
 		sub.addActionListener(this);
