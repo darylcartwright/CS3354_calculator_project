@@ -33,29 +33,9 @@ public class CalculatorUI implements ActionListener {
 		frame = new JFrame("Calculator");
 		frame.setResizable(true);
 		text = new JTextArea(2, 25);
-
 		mainPanel = new JPanel(new FlowLayout());
 		calc = new Calculator();
 
-	}
-
-		// JPanel numberPanel = CreatePanel.createNumberPanel();
-		// numberPanel.setLayout(new GridLayout(4, 3));
-		// JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
-		// JPanel trigPanel = CreatePanel.createTrigPanel();
-		// JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
-		// JPanel cancelPanel = CreatePanel.createCancelPanel();
-
-		//mainPanel = new JPanel(new FlowLayout());
-		// mainPanel.add(text);
-
-		// mainPanel.add(numberPanel);
-		// mainPanel.add(primitiveOperationsPanel);
-		// mainPanel.add(trigPanel);
-		// mainPanel.add(basicFunctionPanel);
-		// mainPanel.add(cancelPanel);
-
-		//calc = new Calculator();
 	}
 
 	/**
@@ -64,8 +44,8 @@ public class CalculatorUI implements ActionListener {
 	public void init() {
 		frame.setSize(300, 340);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//frame.add(mainPanel);
 
+		//Added seperate action listener methods
 		addComponentsToMainPanel();
         addNumberButtonListeners();
         addActionListenersForOperators();
@@ -97,6 +77,7 @@ public class CalculatorUI implements ActionListener {
 		for (int i = 0; i < 10; i++) {
             CreatePanel.jButtons[i].addActionListener(this);
         }
+
 	}
 	private void addActionListenersForOperators() {
         CreatePanel.add.addActionListener(this);
@@ -113,9 +94,7 @@ public class CalculatorUI implements ActionListener {
         CreatePanel.cancel.addActionListener(this);
 
 	}
-		//frame.setVisible(true);
-	//}
-
+		
 	private void addActionListenerForEqual() {
         CreatePanel.equal.addActionListener(this);
     }
