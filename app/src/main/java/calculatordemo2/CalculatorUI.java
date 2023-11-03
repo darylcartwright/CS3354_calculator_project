@@ -93,9 +93,11 @@ public class CalculatorUI implements ActionListener {
         mainPanel.add(cancelPanel);
     }
 
+	private void addNumberButtonListeners() {
 		for (int i = 0; i < 10; i++) {
             CreatePanel.jButtons[i].addActionListener(this);
         }
+	}
 
         CreatePanel.add.addActionListener(this);
         CreatePanel.sub.addActionListener(this);
