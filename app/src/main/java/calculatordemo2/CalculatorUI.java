@@ -39,21 +39,21 @@ public class CalculatorUI implements ActionListener {
 
 	}
 
-		JPanel numberPanel = CreatePanel.createNumberPanel();
-		numberPanel.setLayout(new GridLayout(4, 3));
-		JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
-		JPanel trigPanel = CreatePanel.createTrigPanel();
-		JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
-		JPanel cancelPanel = CreatePanel.createCancelPanel();
+		// JPanel numberPanel = CreatePanel.createNumberPanel();
+		// numberPanel.setLayout(new GridLayout(4, 3));
+		// JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
+		// JPanel trigPanel = CreatePanel.createTrigPanel();
+		// JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
+		// JPanel cancelPanel = CreatePanel.createCancelPanel();
 
 		//mainPanel = new JPanel(new FlowLayout());
-		mainPanel.add(text);
+		// mainPanel.add(text);
 
-		mainPanel.add(numberPanel);
-		mainPanel.add(primitiveOperationsPanel);
-		mainPanel.add(trigPanel);
-		mainPanel.add(basicFunctionPanel);
-		mainPanel.add(cancelPanel);
+		// mainPanel.add(numberPanel);
+		// mainPanel.add(primitiveOperationsPanel);
+		// mainPanel.add(trigPanel);
+		// mainPanel.add(basicFunctionPanel);
+		// mainPanel.add(cancelPanel);
 
 		//calc = new Calculator();
 	}
@@ -77,6 +77,21 @@ public class CalculatorUI implements ActionListener {
 
 	}
 
+	private void addComponentsToMainPanel() {
+		JPanel numberPanel = CreatePanel.createNumberPanel();
+        numberPanel.setLayout(new GridLayout(4, 3));
+        JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
+        JPanel trigPanel = CreatePanel.createTrigPanel();
+        JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
+        JPanel cancelPanel = CreatePanel.createCancelPanel();
+
+        mainPanel.add(text);
+        mainPanel.add(numberPanel);
+        mainPanel.add(primitiveOperationsPanel);
+        mainPanel.add(trigPanel);
+        mainPanel.add(basicFunctionPanel);
+        mainPanel.add(cancelPanel);
+    }
 
 		for (int i = 0; i < 10; i++) {
             CreatePanel.jButtons[i].addActionListener(this);
