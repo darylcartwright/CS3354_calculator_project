@@ -24,7 +24,8 @@ public class CalculatorUI implements ActionListener {
 	private final JFrame frame;
     private final JPanel mainPanel;
     private final Calculator calc;
-	private final JTextArea text;
+	//Added for testing purpose
+	final JTextArea text;
 
 	/**
 	 * The main top level GUI of the calculator and it's frame, button, and text area for # display

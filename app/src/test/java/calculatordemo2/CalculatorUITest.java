@@ -37,5 +37,16 @@ class CalculatorUITest {
     void appPanelIsCreated() {
         assertNotNull(classUnderTest, "app should have a panel object");
     }
+
+// Reader Unit Test
+    @Test
+    public void ValidInput() {
+        CalculatorUI calculatorUI = new CalculatorUI();
+        // Add a valid num
+        calculatorUI.text.setText("89.3"); 
+        Double result = calculatorUI.reader();
+        assertEquals(89.3, result, 0.001); 
+    }
+
 }
 
