@@ -98,7 +98,7 @@ public class CalculatorUI implements ActionListener {
             CreatePanel.jButtons[i].addActionListener(this);
         }
 	}
-
+	private void addActionListenersForOperators() {
         CreatePanel.add.addActionListener(this);
         CreatePanel.sub.addActionListener(this);
         CreatePanel.mult.addActionListener(this);
@@ -112,9 +112,17 @@ public class CalculatorUI implements ActionListener {
         CreatePanel.equal.addActionListener(this);
         CreatePanel.cancel.addActionListener(this);
 
-
-		frame.setVisible(true);
 	}
+		//frame.setVisible(true);
+	//}
+
+	private void addActionListenerForEqual() {
+        CreatePanel.equal.addActionListener(this);
+    }
+
+    private void addActionListenerForCancel() {
+        CreatePanel.cancel.addActionListener(this);
+    }
 
 	/**
 	 * Event handling implementation for Calculator button pressing
