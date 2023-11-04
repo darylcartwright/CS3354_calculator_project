@@ -7,4 +7,5 @@ public class CreateButton extends JButton {
     public CreateButton(String label) {
         super(label);
     }
+
 }

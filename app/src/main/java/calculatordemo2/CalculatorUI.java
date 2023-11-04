@@ -60,7 +60,6 @@ public class CalculatorUI implements ActionListener {
 
 	private void addComponentsToMainPanel() {
 		JPanel digitPanel = CreatePanel.createDigitPanel();
-        digitPanel.setLayout(new GridLayout(4, 3));
         JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
         JPanel trigPanel = CreatePanel.createTrigPanel();
         JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
@@ -76,7 +75,7 @@ public class CalculatorUI implements ActionListener {
 
 	private void addDigitButtonListeners() {
 		for (int i = 0; i < 10; i++) {
-            CreatePanel.jButtons[i].addActionListener(this);
+            CreatePanel.digitButtons[i].addActionListener(this);
         }
 
 	}
@@ -91,6 +90,9 @@ public class CalculatorUI implements ActionListener {
         CreatePanel.cos.addActionListener(this);
         CreatePanel.sin.addActionListener(this);
         CreatePanel.tan.addActionListener(this);
+		CreatePanel.arcsin.addActionListener(this);
+		CreatePanel.arccos.addActionListener(this);
+		CreatePanel.arctan.addActionListener(this);
         CreatePanel.equal.addActionListener(this);
         CreatePanel.cancel.addActionListener(this);
 
@@ -114,8 +116,8 @@ public class CalculatorUI implements ActionListener {
 		// check 0-9 and update textfield
 
 		 for (int i = 0; i < 10; i++) {
-			if (source == CreatePanel.jButtons[i]) {
-                text.replaceSelection(CreatePanel.buttonValue[i]);
+			if (source == CreatePanel.digitButtons[i]) {
+                text.replaceSelection(CreatePanel.digitValue[i]);
                 return;
             }
         }
