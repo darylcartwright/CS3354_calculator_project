@@ -3,16 +3,28 @@
  */
 package calculatordemo2;
 
+import javax.swing.JButton;
 import javax.swing.JTextArea;
 import org.junit.jupiter.api.Test;
+
+import calculatordemo2.panel.CreatePanel;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
+import java.awt.event.ActionEvent;
 import java.lang.reflect.Field;  // This brings in the Field feature of Java Reflection
 
 class CalculatorUITest {
 
     private static CalculatorUI classUnderTest;
+
+    // Create action event to simulate a button click event
+    // Input JButton to simulate click for, return ActionEvent object representing the button click event
+    private ActionEvent createActionEvent(JButton button) {
+        return new ActionEvent(button, ActionEvent.ACTION_PERFORMED, button.getActionCommand());
+    }
+
 
     @BeforeAll
     public static void setUp() {
@@ -38,7 +50,7 @@ class CalculatorUITest {
         assertNotNull(classUnderTest, "app should have a panel object");
     }
 
-// Reader Unit Test
+    // Reader Unit Test
     @Test
     public void ReaderValidInput() {
         CalculatorUI calculatorUI = new CalculatorUI();
@@ -48,7 +60,7 @@ class CalculatorUITest {
         assertEquals(89.3, result, 0.001); 
     }
 
-// Writer Unit Test
+    // Writer Unit Test
     @Test
     public void WriterValidInput() {
         CalculatorUI calculatorUI = new CalculatorUI();
@@ -56,6 +68,121 @@ class CalculatorUITest {
         calculatorUI.writer(39.7); 
         // See if text field is updated in the right way
         assertEquals("39.7", calculatorUI.text.getText());  
+    }
+
+
+    // The following unit tests test the display on the text field of the calculator based on actions performed
+    
+    @DisplayName ("Test displaying digits in UI")
+    @Test
+    void testDigitButtonsDisplay() {
+        // Simulate clicking digit button '1'
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.digitButtons[1]));
+        // Verify the display text after clicking digit button '1'
+        assertEquals("1", classUnderTest.text.getText());   // retrieve current text input user in UI
+
+        // Simulate clicking digit button '5' after clicking digit button '1' (should show both digits)
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.digitButtons[5]));
+        // Verify the display text after clicking digit button '5'
+        assertEquals("15", classUnderTest.text.getText());
+    }
+
+    @DisplayName ("Test displaying addition operation in UI")
+    @Test
+    void testAdditionOperationDisplay() {
+        // Simulate setting the text field to "10"
+        classUnderTest.text.setText("10");
+        // Simulate clicking addition button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.add));
+        // Verify the display text after clicking addition button
+        assertEquals("10+", classUnderTest.text.getText());
+    }
+
+    @DisplayName ("Test displaying subtraction operation in UI")
+    @Test
+    void testSubtractionOperationDisplay() {
+        // Simulate setting the text field to "7"
+        classUnderTest.text.setText("7");
+        // Simulate clicking the subtraction button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.sub));
+        // Verify the display text after clicking subtraction button
+        assertEquals("7-", classUnderTest.text.getText());
+    }
+
+    @DisplayName ("Test displaying multiplication operation in UI")
+    @Test
+    void testMultiplicationOperationDisplay() {
+        // Simulate setting the text field to "2"
+        classUnderTest.text.setText("2");
+        // Simulate clicking the multiplication button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.mult));
+        // Verify the display text after clicking multiplication button 
+        assertEquals("2*", classUnderTest.text.getText());
+    }
+
+    @DisplayName ("Test displaying division operation in UI")
+    @Test
+    void testDivisionOperationDisplay() {
+        // Simulate setting the text field to "100"
+        classUnderTest.text.setText("100");
+        // Simulate clicking the division button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.div));
+        // Verify the display text after clicking division button
+        assertEquals("100/", classUnderTest.text.getText());
+    }
+
+    @DisplayName("Test equal button operation in UI")
+    @Test
+    void testEqualButtonOperation() {
+        // Simulate setting the text field to "15"
+        classUnderTest.text.setText("15");
+        // Simulate clicking subtraction button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.sub));
+        // Simulate entering another number "7"
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.digitButtons[7]));
+        // Verify the display text after clicking subtraction button and entering another number
+        assertEquals("15-7", classUnderTest.text.getText());
+
+        // Simulate clicking equal button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.equal));
+        // Verify the display text after clicking equal button
+        assertEquals("8", classUnderTest.text.getText());
+    }
+
+    @DisplayName("Test multiple operations and equal button in UI")
+    @Test
+    void testMultipleOperationsAndResultDisplay() {
+        // Simulate setting the text field to "10"
+        classUnderTest.text.setText("10");
+        // Simulate clicking addition button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.add));
+        // Simulate entering another number "5"
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.digitButtons[5]));
+        // Verify the display text after clicking addition button and entering another number
+        assertEquals("10+5", classUnderTest.text.getText());
+
+        // Simulate clicking multiplication button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.mult));
+        // Simulate entering another number "2"
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.digitButtons[2]));
+        // Verify the display text after clicking multiplication button and entering another number
+        assertEquals("10+5*2", classUnderTest.text.getText());
+
+        // Simulate clicking equal button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.equal));
+        // Verify the display text after clicking equal button
+        assertEquals("20", classUnderTest.text.getText());
+    }
+
+    @DisplayName ("Test displaying cancel operation in UI")
+    @Test
+    void testCancelOperationDisplay() {
+        // Simulate setting the text field to "42"
+        classUnderTest.text.setText("42");
+        // Simulate clicking cancel (clear) button
+        classUnderTest.actionPerformed(createActionEvent(CreatePanel.cancel));
+        // Verify the display text after clicking cancel (clear) button
+        assertEquals("", classUnderTest.text.getText());
     }
 
 }
