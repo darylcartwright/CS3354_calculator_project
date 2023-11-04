@@ -48,7 +48,7 @@ public class CalculatorUI implements ActionListener {
 
 		//Added seperate action listener methods
 		addComponentsToMainPanel();
-        addNumberButtonListeners();
+        addDigitButtonListeners();
         addActionListenersForOperators();
         addActionListenerForEqual();
         addActionListenerForCancel();
@@ -59,22 +59,22 @@ public class CalculatorUI implements ActionListener {
 	}
 
 	private void addComponentsToMainPanel() {
-		JPanel numberPanel = CreatePanel.createNumberPanel();
-        numberPanel.setLayout(new GridLayout(4, 3));
+		JPanel digitPanel = CreatePanel.createDigitPanel();
+        digitPanel.setLayout(new GridLayout(4, 3));
         JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
         JPanel trigPanel = CreatePanel.createTrigPanel();
         JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
         JPanel cancelPanel = CreatePanel.createCancelPanel();
 
         mainPanel.add(text);
-        mainPanel.add(numberPanel);
+        mainPanel.add(digitPanel);
         mainPanel.add(primitiveOperationsPanel);
         mainPanel.add(trigPanel);
         mainPanel.add(basicFunctionPanel);
         mainPanel.add(cancelPanel);
     }
 
-	private void addNumberButtonListeners() {
+	private void addDigitButtonListeners() {
 		for (int i = 0; i < 10; i++) {
             CreatePanel.jButtons[i].addActionListener(this);
         }

@@ -14,43 +14,17 @@ public class CreatePanel {
     public static CreateButton sqrRt, sqr, inverse;
     public static CreateButton cancel;
 
-    public static JPanel createNumberPanel() {
-        JPanel numberPanel = new JPanel(new FlowLayout());
+    public static JPanel createDigitPanel() {
+        JPanel digitPanel = new JPanel(new FlowLayout());
+        CreateButton[] digitButtons = new CreateButton[10];
 
-        one = new CreateButton(buttonValue[1]);
-        two = new CreateButton(buttonValue[2]);
-        three = new CreateButton(buttonValue[3]);
-        four = new CreateButton(buttonValue[4]);
-        five = new CreateButton(buttonValue[5]);
-        six = new CreateButton(buttonValue[6]);
-        seven = new CreateButton(buttonValue[7]);
-        eight = new CreateButton(buttonValue[8]);
-        nine = new CreateButton(buttonValue[9]);
-        zero = new CreateButton(buttonValue[0]);
+        for (int i = 0; i < 10; i++) {
+            digitButtons[i] = new CreateButton(buttonValue[i]);
+            jButtons[i] = digitButtons[i];
+            digitPanel.add(digitButtons[i]);
+        }
 
-        jButtons[1] = one;
-        jButtons[2] = two;
-        jButtons[3] = three;
-        jButtons[4] = four;
-        jButtons[5] = five;
-        jButtons[6] = six;
-        jButtons[7] = seven;
-        jButtons[8] = eight;
-        jButtons[9] = nine;
-        jButtons[0] = zero;
-
-        numberPanel.add(one);
-        numberPanel.add(two);
-        numberPanel.add(three);
-        numberPanel.add(four);
-        numberPanel.add(five);
-        numberPanel.add(six);
-        numberPanel.add(seven);
-        numberPanel.add(eight);
-        numberPanel.add(nine);
-        numberPanel.add(zero);
-
-        return numberPanel;
+        return digitPanel;
     }
 
     public static JPanel createPrimitiveOperationPanel() {
