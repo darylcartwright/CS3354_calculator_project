@@ -27,7 +27,7 @@ public class CreatePanel {
     }
 
     public static JPanel createPrimitiveOperationPanel() {
-        JPanel primitiveOperationPanel = new JPanel(new FlowLayout());
+        JPanel primitiveOperationPanel = new JPanel(new GridLayout(5, 1));
 
         add = new CreateButton("+");
         sub = new CreateButton("-");
