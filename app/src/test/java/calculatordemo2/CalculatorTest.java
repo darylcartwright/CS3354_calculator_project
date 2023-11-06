@@ -82,7 +82,7 @@ class CalculatorTest {
         assertThrows(Error.class, () -> classUnderTest.calcScience(null, 10.0));
     }
 
-    //7 unit tests for twoOpOperations():
+    //7 unit tests for twoOpOperations()
 
     @DisplayName("Tests twoOpOperations with addition")
     @Test
@@ -121,5 +121,24 @@ class CalculatorTest {
 
 
 
-    //2 unit tests for twoOpCaller():
+    //2 unit tests for twoOpCaller()
+
+    @DisplayName("Tests twoOpCaller with equals")
+    @Test
+    void testTwoOpCallerEquals() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 5.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 3.0);
+        double result = classUnderTest.calculateEqual(0.0);
+        assertEquals(8.0, result);
+    }
+
+    @DisplayName("Tests twoOpCaller with cancellation")
+    @Test
+    void testTwoOpCallerCancellation() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 5.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 3.0);
+        double result = classUnderTest.reset();
+        assertEquals(Double.NaN, result);
+    }
+
 }
