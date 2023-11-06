@@ -81,4 +81,45 @@ class CalculatorTest {
     void testThrowError() {
         assertThrows(Error.class, () -> classUnderTest.calcScience(null, 10.0));
     }
+
+    //7 unit tests for twoOpOperations():
+
+    @DisplayName("Tests twoOpOperations with addition")
+    @Test
+    void testTwoOpOperationsAddition() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 7.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 2.0);
+        assertEquals(9.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with subtraction")
+    @Test
+    void testTwoOpOperationsSubtraction() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.subtract, 5.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.subtract, 3.0);
+        assertEquals(2.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with multiplication")
+    @Test
+    void testTwoOpOperationsMultiplication() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 4.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 6.0);
+        assertEquals(24.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with division")
+    @Test
+    void testTwoOpOperationsDivision() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 18.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 2.0);
+        assertEquals(9.0, classUnderTest.twoOpOperations());
+    }
+
+
+
+
+
+
+    //2 unit tests for twoOpCaller():
 }
