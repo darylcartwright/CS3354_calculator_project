@@ -93,9 +93,6 @@ public class CalculatorUI implements ActionListener {
 		CreatePanel.arcsin.addActionListener(this);
 		CreatePanel.arccos.addActionListener(this);
 		CreatePanel.arctan.addActionListener(this);
-        CreatePanel.equal.addActionListener(this);
-        CreatePanel.cancel.addActionListener(this);
-
 	}
 		
 	private void addActionListenerForEqual() {
