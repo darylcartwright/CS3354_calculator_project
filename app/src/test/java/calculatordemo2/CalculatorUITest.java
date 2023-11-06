@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 import java.lang.reflect.Field;  // This brings in the Field feature of Java Reflection
+import javax.swing.JButton;
 
 class CalculatorUITest {
 
@@ -56,6 +57,13 @@ class CalculatorUITest {
         calculatorUI.writer(39.7); 
         // See if text field is updated in the right way
         assertEquals("39.7", calculatorUI.text.getText());  
+    }
+
+    @DisplayName("Testing Display of Digit Button")
+    @Test
+    public void displayDigit() {
+        
+
     }
 
 }
