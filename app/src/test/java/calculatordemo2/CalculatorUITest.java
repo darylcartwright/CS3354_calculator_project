@@ -8,8 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
+import java.awt.event.ActionEvent;
 import java.lang.reflect.Field;  // This brings in the Field feature of Java Reflection
-import javax.swing.JButton;
+import calculatordemo2.panel.CreatePanel;
 
 class CalculatorUITest {
 
@@ -62,9 +63,12 @@ class CalculatorUITest {
     @DisplayName("Testing Display of Digit Button")
     @Test
     public void displayDigit() {
-        
-
-    }
+        ActionEvent e = new ActionEvent(CreatePanel.digitButtons[1], ActionEvent.ACTION_PERFORMED, "");
+        classUnderTest.actionPerformed(e);
+        String expectedDisplayText = CreatePanel.digitValue[1];
+        String actualDisplayText = classUnderTest.text.getText();
+        assertEquals(expectedDisplayText, actualDisplayText);
+    }  
 
 }
 

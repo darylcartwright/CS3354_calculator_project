@@ -8,4 +8,11 @@ public class CreateButton extends JButton {
         super(label);
     }
 
+    public static JButton createOperationButton(String label) {
+        return new CreateButton(label);
+    }
+
+    public static JButton createDigitButton(String label) {
+        return new CreateButton(label);
+    }
 }
