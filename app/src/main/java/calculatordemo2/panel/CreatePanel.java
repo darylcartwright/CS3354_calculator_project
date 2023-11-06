@@ -1,66 +1,41 @@
 package calculatordemo2.panel;
 
 import javax.swing.JPanel;
+import javax.swing.JButton;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import calculatordemo2.button.*;
 
 public class CreatePanel {
-    public static final String[] buttonValue = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    public static final String[] digitValue = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
-    public static CreateButton[] jButtons = new CreateButton[10];
-    public static CreateButton one, two, three, four, five, six, seven, eight, nine, zero;
-    public static CreateButton add, sub, mult, div, equal;
-    public static CreateButton sin, cos, tan;
-    public static CreateButton sqrRt, sqr, inverse;
-    public static CreateButton cancel;
+    public static JButton[] digitButtons = new JButton[10];
 
-    public static JPanel createNumberPanel() {
-        JPanel numberPanel = new JPanel(new FlowLayout());
+    public static JButton one, two, three, four, five, six, seven, eight, nine, zero;
+    public static JButton add, sub, mult, div, equal;
+    public static JButton sin, cos, tan, arcsin, arccos, arctan;
+    public static JButton sqrRt, sqr, inverse;
+    public static JButton cancel;
 
-        one = new CreateButton(buttonValue[1]);
-        two = new CreateButton(buttonValue[2]);
-        three = new CreateButton(buttonValue[3]);
-        four = new CreateButton(buttonValue[4]);
-        five = new CreateButton(buttonValue[5]);
-        six = new CreateButton(buttonValue[6]);
-        seven = new CreateButton(buttonValue[7]);
-        eight = new CreateButton(buttonValue[8]);
-        nine = new CreateButton(buttonValue[9]);
-        zero = new CreateButton(buttonValue[0]);
+    public static JPanel createDigitPanel() {
+        JPanel digitPanel = new JPanel(new GridLayout(4, 3));
 
-        jButtons[1] = one;
-        jButtons[2] = two;
-        jButtons[3] = three;
-        jButtons[4] = four;
-        jButtons[5] = five;
-        jButtons[6] = six;
-        jButtons[7] = seven;
-        jButtons[8] = eight;
-        jButtons[9] = nine;
-        jButtons[0] = zero;
+        for (int i = 0; i < 10; i++) {
+            digitButtons[i] = new CreateButton(digitValue[i]);
+            digitPanel.add(digitButtons[i]);
+        }
 
-        numberPanel.add(one);
-        numberPanel.add(two);
-        numberPanel.add(three);
-        numberPanel.add(four);
-        numberPanel.add(five);
-        numberPanel.add(six);
-        numberPanel.add(seven);
-        numberPanel.add(eight);
-        numberPanel.add(nine);
-        numberPanel.add(zero);
-
-        return numberPanel;
+        return digitPanel;
     }
 
     public static JPanel createPrimitiveOperationPanel() {
-        JPanel primitiveOperationPanel = new JPanel(new FlowLayout());
+        JPanel primitiveOperationPanel = new JPanel(new GridLayout(5, 1));
 
-        add = new CreateButton("+");
-        sub = new CreateButton("-");
-        mult = new CreateButton("*");
-        div = new CreateButton("/");
-        equal = new CreateButton("=");
+        add = CreateButton.createOperationButton("+");
+        sub = CreateButton.createOperationButton("-");
+        mult = CreateButton.createOperationButton("*");
+        div = CreateButton.createOperationButton("/");
+        equal = CreateButton.createOperationButton("=");
 
         primitiveOperationPanel.add(add);
         primitiveOperationPanel.add(sub);
@@ -72,15 +47,21 @@ public class CreatePanel {
     }
 
     public static JPanel createTrigPanel() {
-        JPanel trigPanel = new JPanel(new FlowLayout());
+        JPanel trigPanel = new JPanel(new GridLayout(2, 3));
 
-        sin = new CreateButton("Sin");
-        cos = new CreateButton("Cos");
-        tan = new CreateButton("Tan");
+        sin = CreateButton.createOperationButton("sin");
+        cos = CreateButton.createOperationButton("cos");
+        tan = CreateButton.createOperationButton("tan");
+        arcsin = CreateButton.createOperationButton("sin^-1");
+        arccos = CreateButton.createOperationButton("cos^-1");
+        arctan = CreateButton.createOperationButton("tan^-1");
 
         trigPanel.add(sin);
         trigPanel.add(cos);
         trigPanel.add(tan);
+        trigPanel.add(arcsin);
+        trigPanel.add(arccos);
+        trigPanel.add(arctan);
 
         return trigPanel;
     }
@@ -88,9 +69,9 @@ public class CreatePanel {
     public static JPanel createBasicFunctionPanel() {
         JPanel basicFunctionPanel = new JPanel(new FlowLayout());
 
-        sqrRt = new CreateButton("√");
-        sqr = new CreateButton("x*x");
-        inverse = new CreateButton("1/x");
+        sqrRt = CreateButton.createOperationButton("√");
+        sqr = CreateButton.createOperationButton("x*x");
+        inverse = CreateButton.createOperationButton("1/x");
 
         basicFunctionPanel.add(sqrRt);
         basicFunctionPanel.add(sqr);
@@ -102,7 +83,7 @@ public class CreatePanel {
     public static JPanel createCancelPanel() {
         JPanel cancelPanel = new JPanel(new FlowLayout());
 
-        cancel = new CreateButton("C");
+        cancel = CreateButton.createOperationButton("C");
 
         cancelPanel.add(cancel);
 

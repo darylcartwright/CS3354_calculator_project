@@ -1,15 +1,14 @@
 package calculatordemo2;
 
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static javax.swing.WindowConstants.*;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 import calculatordemo2.panel.CreatePanel;
 
@@ -48,7 +47,7 @@ public class CalculatorUI implements ActionListener {
 
 		//Added seperate action listener methods
 		addComponentsToMainPanel();
-        addNumberButtonListeners();
+        addDigitButtonListeners();
         addActionListenersForOperators();
         addActionListenerForEqual();
         addActionListenerForCancel();
@@ -59,27 +58,27 @@ public class CalculatorUI implements ActionListener {
 	}
 
 	private void addComponentsToMainPanel() {
-		JPanel numberPanel = CreatePanel.createNumberPanel();
-        numberPanel.setLayout(new GridLayout(4, 3));
+		JPanel digitPanel = CreatePanel.createDigitPanel();
         JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
         JPanel trigPanel = CreatePanel.createTrigPanel();
         JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
         JPanel cancelPanel = CreatePanel.createCancelPanel();
 
         mainPanel.add(text);
-        mainPanel.add(numberPanel);
+        mainPanel.add(digitPanel);
         mainPanel.add(primitiveOperationsPanel);
         mainPanel.add(trigPanel);
         mainPanel.add(basicFunctionPanel);
         mainPanel.add(cancelPanel);
     }
 
-	private void addNumberButtonListeners() {
+	private void addDigitButtonListeners() {
 		for (int i = 0; i < 10; i++) {
-            CreatePanel.jButtons[i].addActionListener(this);
-        }
-
+			JButton digitButton = CreatePanel.digitButtons[i];
+			digitButton.addActionListener(this);
+		}
 	}
+
 	private void addActionListenersForOperators() {
         CreatePanel.add.addActionListener(this);
         CreatePanel.sub.addActionListener(this);
@@ -91,9 +90,9 @@ public class CalculatorUI implements ActionListener {
         CreatePanel.cos.addActionListener(this);
         CreatePanel.sin.addActionListener(this);
         CreatePanel.tan.addActionListener(this);
-        CreatePanel.equal.addActionListener(this);
-        CreatePanel.cancel.addActionListener(this);
-
+		CreatePanel.arcsin.addActionListener(this);
+		CreatePanel.arccos.addActionListener(this);
+		CreatePanel.arctan.addActionListener(this);
 	}
 		
 	private void addActionListenerForEqual() {
@@ -113,9 +112,10 @@ public class CalculatorUI implements ActionListener {
 		final Object source = e.getSource();
 		// check 0-9 and update textfield
 
-		 for (int i = 0; i < 10; i++) {
-			if (source == CreatePanel.jButtons[i]) {
-                text.replaceSelection(CreatePanel.buttonValue[i]);
+		for (int i = 0; i < 10; i++) {
+            JButton digitButton = CreatePanel.digitButtons[i];
+            if (source == digitButton) {
+                text.replaceSelection(CreatePanel.digitValue[i]);
                 return;
             }
         }

@@ -55,6 +55,27 @@ class CalculatorTest {
         assertEquals(Math.tan(num), classUnderTest.calcScience(Calculator.singleOperator.tan, num));
     }
 
+    @DisplayName("Tests the inverse sine function in degrees")
+    @Test
+    void testArcsin() {
+        double num = 0.5;
+        assertEquals(Math.asin(num), classUnderTest.calcScience(Calculator.singleOperator.arcsin, num));
+    }
+
+    @DisplayName("Tests the inverse cosine function in degrees")
+    @Test
+    void testArccos() {
+        double num = 0.5;
+        assertEquals(Math.acos(num), classUnderTest.calcScience(Calculator.singleOperator.arccos, num));
+    }
+
+    @DisplayName("Tests the inverse tangent function in degrees")
+    @Test
+    void testArctan() {
+        double num = 0.5;
+        assertEquals(Math.atan(num), classUnderTest.calcScience(Calculator.singleOperator.arctan, num));
+    }
+
     @DisplayName("Tests whether an error is thrown if a null mode is passed")
     @Test
     void testThrowError() {
