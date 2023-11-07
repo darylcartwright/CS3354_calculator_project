@@ -116,6 +116,32 @@ class CalculatorTest {
         assertEquals(9.0, classUnderTest.twoOpOperations());
     }
 
+    @DisplayName("Tests twoOpOperations with zero as the second operand")
+    @Test
+    void testTwoOpOperationsWithZeroSecondOperand() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 8.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 0.0);
+        assertEquals(8.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with multiplication by zero")
+    @Test
+    void testTwoOpOperationsMultiplicationByZero() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 3.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 0.0);
+        assertEquals(0.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with division by zero")
+    @Test
+    void testTwoOpOperationsDivisionByZero() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 5.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 0.0);
+     
+        double result = classUnderTest.twoOpOperations();
+        assertTrue(Double.isInfinite(result));
+    }
+
 
 
 
