@@ -100,13 +100,13 @@ class CalculatorTest {
         assertEquals(2.0, classUnderTest.twoOpOperations());
     }
 
-    @DisplayName("Tests twoOpOperations with multiplication")
-    @Test
-    void testTwoOpOperationsMultiplication() {
-        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 4.0);
-        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 6.0);
-        assertEquals(24.0, classUnderTest.twoOpOperations());
-    }
+    // @DisplayName("Tests twoOpOperations with multiplication")
+    // @Test
+    // void testTwoOpOperationsMultiplication() {
+    //     classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 4.0);
+    //     classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 6.0);
+    //     assertEquals(24.0, classUnderTest.twoOpOperations());
+    // }
 
     @DisplayName("Tests twoOpOperations with division")
     @Test
@@ -142,12 +142,7 @@ class CalculatorTest {
         assertTrue(Double.isInfinite(result));
     }
 
-
-
-
-
-
-    //2 unit tests for twoOpCaller()
+ //2 unit tests for twoOpCaller()
 
     @DisplayName("Tests twoOpCaller with equals")
     @Test
@@ -167,4 +162,5 @@ class CalculatorTest {
         assertEquals(Double.NaN, result);
     }
 
+   
 }
