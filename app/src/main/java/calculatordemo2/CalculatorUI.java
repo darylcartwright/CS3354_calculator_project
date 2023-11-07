@@ -110,15 +110,26 @@ public class CalculatorUI implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final Object source = e.getSource();
+		String currentText = text.getText(); // Get the current text from the text field
+	
 		// check 0-9 and update textfield
-
 		for (int i = 0; i < 10; i++) {
-            JButton digitButton = CreatePanel.digitButtons[i];
-            if (source == digitButton) {
-                text.replaceSelection(CreatePanel.digitValue[i]);
-                return;
-            }
-        }
+			JButton digitButton = CreatePanel.digitButtons[i];
+			if (source == digitButton) {
+				String digitValue = CreatePanel.digitValue[i];
+				if (currentText.isEmpty()) {
+					// If the text field is empty, set the current digit value as the text
+					text.setText(digitValue);
+				} else {
+					// If the text field is not empty, concatenate the current text with the digit value
+					String updatedText = currentText + digitValue;
+					text.setText(updatedText);
+				}
+				return;
+			}
+		}
+
+		// .
 		if (source == CreatePanel.add) {
 			writer(calc.twoOpCaller(Calculator.twoOperator.add, reader()));
 		}
@@ -142,7 +153,7 @@ public class CalculatorUI implements ActionListener {
 		}
 		if (source == CreatePanel.inverse) {
 			writer(calc.calcScience(
-					Calculator.singleOperator.oneDevidedBy, reader()));
+					Calculator.singleOperator.oneDividedBy, reader()));
 		}
 		if (source == CreatePanel.cos) {
 			writer(calc.calcScience(Calculator.singleOperator.cos,

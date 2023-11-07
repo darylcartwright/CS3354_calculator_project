@@ -15,7 +15,7 @@ public class Calculator{
 	}
 
 	public enum singleOperator {
-		square, squareRoot, oneDevidedBy, cos, sin, tan, arccos, arcsin, arctan
+		square, squareRoot, oneDividedBy, cos, sin, tan, arccos, arcsin, arctan
 	}
 
 	public Double num1, num2;
@@ -101,7 +101,7 @@ public class Calculator{
 		if (newMode == singleOperator.squareRoot) {
 			return Math.sqrt(num);
 		}
-		if (newMode == singleOperator.oneDevidedBy) {
+		if (newMode == singleOperator.oneDividedBy) {
 			return 1 / num;
 		}
 		if (newMode == singleOperator.cos) {

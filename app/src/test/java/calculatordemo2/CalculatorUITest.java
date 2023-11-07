@@ -4,6 +4,7 @@
 package calculatordemo2;
 
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -15,10 +16,18 @@ import calculatordemo2.panel.CreatePanel;
 class CalculatorUITest {
 
     private static CalculatorUI classUnderTest;
+    private static JButton jButtons[];
 
     @BeforeAll
     public static void setUp() {
+        CreatePanel.createDigitPanel();
+        CreatePanel.createCancelPanel();
         classUnderTest = new CalculatorUI();
+        jButtons = new JButton[10];
+        for (int i = 0; i < 10; i++) {
+            jButtons[i] = CreatePanel.digitButtons[i];
+        }
+        classUnderTest.text.setText("");
     }
 
     @DisplayName("Testing that writer writes the display")
@@ -60,15 +69,41 @@ class CalculatorUITest {
         assertEquals("39.7", calculatorUI.text.getText());  
     }
 
-    @DisplayName("Testing Display of Digit Button")
+    @DisplayName("Testing Display of Single Digit Button")
     @Test
-    public void displayDigit() {
-        ActionEvent e = new ActionEvent(CreatePanel.digitButtons[1], ActionEvent.ACTION_PERFORMED, "");
+    public void displaySingleDigit() {
+        classUnderTest.text.setText("");
+        ActionEvent e = new ActionEvent(jButtons[1], ActionEvent.ACTION_PERFORMED, "");
         classUnderTest.actionPerformed(e);
         String expectedDisplayText = CreatePanel.digitValue[1];
         String actualDisplayText = classUnderTest.text.getText();
         assertEquals(expectedDisplayText, actualDisplayText);
-    }  
+    }
+    
+    @DisplayName("Testing Display of Two Digit Buttons")
+    @Test
+    public void displayTwoDigits() {
+        classUnderTest.text.setText("");
+        ActionEvent e1 = new ActionEvent(jButtons[2], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e2 = new ActionEvent(jButtons[3], ActionEvent.ACTION_PERFORMED, "");
+        classUnderTest.actionPerformed(e1);
+        classUnderTest.actionPerformed(e2);
+        String expectedDisplayText = CreatePanel.digitValue[2] + CreatePanel.digitValue[3];
+        String actualDisplayText = classUnderTest.text.getText();
+        assertEquals(expectedDisplayText, actualDisplayText);
+    }
+
+    @DisplayName("Testing Display after Cancel Button")
+    @Test
+    public void clearDisplay() {
+        ActionEvent e1 = new ActionEvent(CreatePanel.digitButtons[4], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e2 = new ActionEvent(CreatePanel.cancel, ActionEvent.ACTION_PERFORMED, "");
+        classUnderTest.actionPerformed(e1);
+        classUnderTest.actionPerformed(e2);
+        String expectedDisplayText = "";
+        String actualDisplayText = classUnderTest.text.getText();
+        assertEquals(expectedDisplayText, actualDisplayText);
+    }
 
 }
 
