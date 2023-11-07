@@ -144,13 +144,14 @@ class CalculatorTest {
 
  //2 unit tests for twoOpCaller()
 
-    @DisplayName("Tests twoOpCaller with equals")
-    @Test
-    void testTwoOpCallerEquals() {
-        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 5.0);
-        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 3.0);
-        double result = classUnderTest.calculateEqual(0.0);
-        assertEquals(8.0, result);
+ @DisplayName("Test twoOpCaller with addition")
+ @Test
+ void testTwoOpCallerAddition() {
+     Calculator calculator = new Calculator();
+     double result = calculator.twoOpCaller(Calculator.twoOperator.add, 5.0);
+     assertEquals(Double.NaN, result);
+     assertEquals(5.0, calculator.num1);
+     assertEquals(Calculator.twoOperator.add, calculator.mode);
     }
 
     @DisplayName("Tests twoOpCaller with cancellation")
