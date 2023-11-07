@@ -84,44 +84,47 @@ class CalculatorTest {
 
     //7 unit tests for twoOpOperations()
 
-    @DisplayName("Tests twoOpOperations with addition")
+    @DisplayName("Test twoOpOperations with addition NEW")
     @Test
     void testTwoOpOperationsAddition() {
-        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 7.0);
-        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 2.0);
-        assertEquals(9.0, classUnderTest.twoOpOperations());
+        Calculator calculator = new Calculator();
+        calculator.num1 = 5.0;
+        calculator.num2 = 3.0;
+        calculator.mode = Calculator.twoOperator.add;
+        assertEquals(8.0, calculator.twoOpOperations());
     }
 
-    @DisplayName("Tests twoOpOperations with subtraction")
+
+    @DisplayName("Test twoOpOperations with subtraction NEW")
     @Test
     void testTwoOpOperationsSubtraction() {
-        classUnderTest.twoOpCaller(Calculator.twoOperator.subtract, 5.0);
-        classUnderTest.twoOpCaller(Calculator.twoOperator.subtract, 3.0);
-        assertEquals(2.0, classUnderTest.twoOpOperations());
+        Calculator calculator = new Calculator();
+        calculator.num1 = 8.0;
+        calculator.num2 = 3.0;
+        calculator.mode = Calculator.twoOperator.subtract;
+        assertEquals(5.0, calculator.twoOpOperations());
     }
 
-    // @DisplayName("Tests twoOpOperations with multiplication")
-    // @Test
-    // void testTwoOpOperationsMultiplication() {
-    //     classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 4.0);
-    //     classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 6.0);
-    //     assertEquals(24.0, classUnderTest.twoOpOperations());
-    // }
 
-    @DisplayName("Tests twoOpOperations with division")
+    @DisplayName("Test twoOpOperations with division NEW")
     @Test
     void testTwoOpOperationsDivision() {
-        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 18.0);
-        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 2.0);
-        assertEquals(9.0, classUnderTest.twoOpOperations());
+        Calculator calculator = new Calculator();
+        calculator.num1 = 9.0;
+        calculator.num2 = 3.0;
+        calculator.mode = Calculator.twoOperator.divide;
+        assertEquals(3.0, calculator.twoOpOperations());
     }
 
-    @DisplayName("Tests twoOpOperations with zero as the second operand")
+
+    @DisplayName("Test twoOpOperations with multiplication NEW")
     @Test
-    void testTwoOpOperationsWithZeroSecondOperand() {
-        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 8.0);
-        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 0.0);
-        assertEquals(8.0, classUnderTest.twoOpOperations());
+    void testTwoOpOperationsMultiplication() {
+        Calculator calculator = new Calculator();
+        calculator.num1 = 4.0;
+        calculator.num2 = 2.5;
+        calculator.mode = Calculator.twoOperator.multiply;
+        assertEquals(10.0, calculator.twoOpOperations());
     }
 
     @DisplayName("Tests twoOpOperations with multiplication by zero")
@@ -132,14 +135,25 @@ class CalculatorTest {
         assertEquals(0.0, classUnderTest.twoOpOperations());
     }
 
-    @DisplayName("Tests twoOpOperations with division by zero")
+
+    @DisplayName("Test twoOpOperations with normal mode")
     @Test
-    void testTwoOpOperationsDivisionByZero() {
-        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 5.0);
-        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 0.0);
-     
-        double result = classUnderTest.twoOpOperations();
-        assertTrue(Double.isInfinite(result));
+    void testTwoOpOperationsNormalMode() {
+        Calculator calculator = new Calculator();
+        calculator.num1 = 7.0;
+        calculator.num2 = 2.0;
+        calculator.mode = Calculator.twoOperator.normal;
+        assertEquals(2.0, calculator.twoOpOperations());
+    }
+
+    @DisplayName("Test twoOpOperations with uninitialized mode")
+    @Test
+    void testTwoOpOperationsUninitializedMode() {
+        Calculator calculator = new Calculator();
+        calculator.num1 = 5.0;
+        calculator.num2 = 3.0;
+        calculator.mode = null;
+        assertThrows(Error.class, calculator::twoOpOperations);
     }
 
  //2 unit tests for twoOpCaller()
