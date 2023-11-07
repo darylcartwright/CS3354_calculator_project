@@ -81,4 +81,90 @@ class CalculatorTest {
     void testThrowError() {
         assertThrows(Error.class, () -> classUnderTest.calcScience(null, 10.0));
     }
+
+    //7 unit tests for twoOpOperations()
+
+    @DisplayName("Tests twoOpOperations with addition")
+    @Test
+    void testTwoOpOperationsAddition() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 7.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 2.0);
+        assertEquals(9.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with subtraction")
+    @Test
+    void testTwoOpOperationsSubtraction() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.subtract, 5.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.subtract, 3.0);
+        assertEquals(2.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with multiplication")
+    @Test
+    void testTwoOpOperationsMultiplication() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 4.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 6.0);
+        assertEquals(24.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with division")
+    @Test
+    void testTwoOpOperationsDivision() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 18.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 2.0);
+        assertEquals(9.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with zero as the second operand")
+    @Test
+    void testTwoOpOperationsWithZeroSecondOperand() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 8.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 0.0);
+        assertEquals(8.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with multiplication by zero")
+    @Test
+    void testTwoOpOperationsMultiplicationByZero() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 3.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.multiply, 0.0);
+        assertEquals(0.0, classUnderTest.twoOpOperations());
+    }
+
+    @DisplayName("Tests twoOpOperations with division by zero")
+    @Test
+    void testTwoOpOperationsDivisionByZero() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 5.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.divide, 0.0);
+     
+        double result = classUnderTest.twoOpOperations();
+        assertTrue(Double.isInfinite(result));
+    }
+
+
+
+
+
+
+    //2 unit tests for twoOpCaller()
+
+    @DisplayName("Tests twoOpCaller with equals")
+    @Test
+    void testTwoOpCallerEquals() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 5.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 3.0);
+        double result = classUnderTest.calculateEqual(0.0);
+        assertEquals(8.0, result);
+    }
+
+    @DisplayName("Tests twoOpCaller with cancellation")
+    @Test
+    void testTwoOpCallerCancellation() {
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 5.0);
+        classUnderTest.twoOpCaller(Calculator.twoOperator.add, 3.0);
+        double result = classUnderTest.reset();
+        assertEquals(Double.NaN, result);
+    }
+
 }
