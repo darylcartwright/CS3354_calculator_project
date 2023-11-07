@@ -111,6 +111,7 @@ public class CalculatorUI implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		final Object source = e.getSource();
 		String currentText = text.getText(); // Get the current text from the text field
+		
 	
 		// check 0-9 and update textfield
 		for (int i = 0; i < 10; i++) {
@@ -122,8 +123,7 @@ public class CalculatorUI implements ActionListener {
 					text.setText(digitValue);
 				} else {
 					// If the text field is not empty, concatenate the current text with the digit value
-					String updatedText = currentText + digitValue;
-					text.setText(updatedText);
+					text.replaceSelection(digitValue);
 				}
 				return;
 			}
