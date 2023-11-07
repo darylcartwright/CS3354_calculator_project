@@ -4,6 +4,7 @@
 package calculatordemo2;
 
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -18,6 +19,7 @@ class CalculatorUITest {
 
     @BeforeAll
     public static void setUp() {
+        CreatePanel.createDigitPanel();
         classUnderTest = new CalculatorUI();
     }
 
@@ -63,7 +65,12 @@ class CalculatorUITest {
     @DisplayName("Testing Display of Digit Button")
     @Test
     public void displayDigit() {
-        ActionEvent e = new ActionEvent(CreatePanel.digitButtons[1], ActionEvent.ACTION_PERFORMED, "");
+        JButton jButtons[];
+        jButtons = new JButton[10];
+        for (int i = 0; i < 10; i++) {
+            jButtons[i] = CreatePanel.digitButtons[i];
+        }
+        ActionEvent e = new ActionEvent(jButtons[1], ActionEvent.ACTION_PERFORMED, "");
         classUnderTest.actionPerformed(e);
         String expectedDisplayText = CreatePanel.digitValue[1];
         String actualDisplayText = classUnderTest.text.getText();

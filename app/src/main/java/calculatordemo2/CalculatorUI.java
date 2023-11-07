@@ -115,7 +115,8 @@ public class CalculatorUI implements ActionListener {
 		for (int i = 0; i < 10; i++) {
             JButton digitButton = CreatePanel.digitButtons[i];
             if (source == digitButton) {
-                text.replaceSelection(CreatePanel.digitValue[i]);
+                //text.replaceSelection(CreatePanel.digitValue[i]);
+				text.setText(CreatePanel.digitValue[i]);
                 return;
             }
         }
@@ -142,7 +143,7 @@ public class CalculatorUI implements ActionListener {
 		}
 		if (source == CreatePanel.inverse) {
 			writer(calc.calcScience(
-					Calculator.singleOperator.oneDevidedBy, reader()));
+					Calculator.singleOperator.oneDividedBy, reader()));
 		}
 		if (source == CreatePanel.cos) {
 			writer(calc.calcScience(Calculator.singleOperator.cos,

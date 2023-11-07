@@ -31,7 +31,7 @@ class CalculatorTest {
     @Test
     void testOneDividedBy() {
         double num = 2.0;
-        assertEquals(1/num, classUnderTest.calcScience(Calculator.singleOperator.oneDevidedBy, num));
+        assertEquals(1/num, classUnderTest.calcScience(Calculator.singleOperator.oneDividedBy, num));
     }
 
     @DisplayName("Tests the cosine function in degrees")
