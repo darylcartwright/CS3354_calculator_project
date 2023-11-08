@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JTextArea;
 import calculatordemo2.button.*;
 
@@ -99,6 +102,14 @@ public class CreatePanel {
         JPanel cancelPanel = new JPanel();
 
         cancel = CreateButton.createOperationButton("C");
+
+         // Separate color scheme for the "C" button
+         cancel.setBackground(new Color(255, 204, 0)); // Orangish background
+         cancel.setForeground(new Color(255, 255, 255)); // White text color
+
+          // For adjusting the button size
+        cancel.setPreferredSize(new Dimension(160, 90));
+
 
         cancelPanel.add(cancel);
 
