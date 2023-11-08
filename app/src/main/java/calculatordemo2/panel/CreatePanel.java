@@ -23,12 +23,34 @@ public class CreatePanel {
     public static JTextArea text;
 
     public static JPanel createDigitPanel() {
-        JPanel digitPanel = new JPanel(new GridLayout(4, 3));
+       // JPanel digitPanel = new JPanel(new GridLayout(4, 3));
+       JPanel digitPanel = new JPanel(new GridLayout(4, 3, 5, 5)); // Adjust spacing
+
+       for (int i = 0; i < 10; i++) {
+        digitButtons[i] = new CreateButton(digitValue[i]);
+        digitButtons[i].setBackground(new Color(153, 153, 153)); // Assign a background color
+        //digitButtons[i].setFont(new Font("Arial", Font.PLAIN, 20)); // Adjust font size
+    }
         JPanel cancelPanel = createCancelPanel();
 
-        for (int i = 0; i < 10; i++) {
-            digitButtons[i] = new CreateButton(digitValue[i]);
-        }
+        // for (int i = 0; i < 10; i++) {
+        //     digitButtons[i] = new CreateButton(digitValue[i]);
+        // }
+
+        // Make the '0' button twice as wide
+    //     zero = new CreateButton(digitValue[0]);
+    //     zero.setBackground(new Color(255, 153, 0)); // Assign the same background color as other digits
+    //    // zero.setFont(new Font("Arial", Font.PLAIN, 20)); // Adjust font size
+    //     zero.setPreferredSize(new Dimension(240, 110)); // Make it twice as wide
+
+    // Create a custom JPanel for the '0' button to set its size
+    JPanel zeroPanel = new JPanel(new BorderLayout());
+    zero = new CreateButton(digitValue[0]);
+    zero.setBackground(new Color(255, 153, 0)); // Assign the same background color as other digits
+    //zero.setFont(new Font("Arial", Font.PLAIN, 20)); // Adjust font size
+    zeroPanel.add(zero, BorderLayout.CENTER);
+    zeroPanel.setPreferredSize(new Dimension(80, 40)); // Make it twice as wide
+
 
         digitPanel.add(digitButtons[7]);
         digitPanel.add(digitButtons[8]);
@@ -39,9 +61,10 @@ public class CreatePanel {
         digitPanel.add(digitButtons[1]);
         digitPanel.add(digitButtons[2]);
         digitPanel.add(digitButtons[3]);
-        digitPanel.add(digitButtons[0]);
+        //digitPanel.add(digitButtons[0]);
+        digitPanel.add(zero); // Add the '0' button
         
-        digitPanel.add(cancelPanel);
+       digitPanel.add(cancelPanel);
 
         return digitPanel;
     }
