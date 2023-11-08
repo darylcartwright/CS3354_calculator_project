@@ -23,33 +23,20 @@ public class CreatePanel {
     public static JTextArea text;
 
     public static JPanel createDigitPanel() {
-       // JPanel digitPanel = new JPanel(new GridLayout(4, 3));
-       JPanel digitPanel = new JPanel(new GridLayout(4, 3, 5, 5)); // Adjust spacing
+       JPanel digitPanel = new JPanel(new GridLayout(4, 3, 5, 5)); 
 
        for (int i = 0; i < 10; i++) {
         digitButtons[i] = new CreateButton(digitValue[i]);
-        digitButtons[i].setBackground(new Color(153, 153, 153)); // Assign a background color
-        //digitButtons[i].setFont(new Font("Arial", Font.PLAIN, 20)); // Adjust font size
+        digitButtons[i].setBackground(new Color(153, 153, 153)); 
     }
         JPanel cancelPanel = createCancelPanel();
 
-        // for (int i = 0; i < 10; i++) {
-        //     digitButtons[i] = new CreateButton(digitValue[i]);
-        // }
-
-        // Make the '0' button twice as wide
-    //     zero = new CreateButton(digitValue[0]);
-    //     zero.setBackground(new Color(255, 153, 0)); // Assign the same background color as other digits
-    //    // zero.setFont(new Font("Arial", Font.PLAIN, 20)); // Adjust font size
-    //     zero.setPreferredSize(new Dimension(240, 110)); // Make it twice as wide
-
-    // Create a custom JPanel for the '0' button to set its size
-    JPanel zeroPanel = new JPanel(new BorderLayout());
-    zero = new CreateButton(digitValue[0]);
-    zero.setBackground(new Color(255, 153, 0)); // Assign the same background color as other digits
-    //zero.setFont(new Font("Arial", Font.PLAIN, 20)); // Adjust font size
-    zeroPanel.add(zero, BorderLayout.CENTER);
-    zeroPanel.setPreferredSize(new Dimension(80, 40)); // Make it twice as wide
+        // Custom JPanel for the '0' button to set its size
+        JPanel zeroPanel = new JPanel(new BorderLayout());
+        zero = new CreateButton(digitValue[0]);
+        zero.setBackground(new Color(255, 153, 0)); //Orange background color
+        zeroPanel.add(zero, BorderLayout.CENTER);
+        zeroPanel.setPreferredSize(new Dimension(20, 30)); // To make it twice as wide
 
 
         digitPanel.add(digitButtons[7]);
@@ -61,8 +48,7 @@ public class CreatePanel {
         digitPanel.add(digitButtons[1]);
         digitPanel.add(digitButtons[2]);
         digitPanel.add(digitButtons[3]);
-        //digitPanel.add(digitButtons[0]);
-        digitPanel.add(zero); // Add the '0' button
+        digitPanel.add(zero); 
         
        digitPanel.add(cancelPanel);
 
@@ -70,7 +56,8 @@ public class CreatePanel {
     }
 
     public static JPanel createPrimitiveOperationPanel() {
-        JPanel primitiveOperationPanel = new JPanel(new GridLayout(5, 1));
+  
+        JPanel primitiveOperationPanel = new JPanel(new GridLayout(5, 1, 5, 5)); 
 
         add = CreateButton.createOperationButton("+");
         sub = CreateButton.createOperationButton("-");
@@ -88,14 +75,18 @@ public class CreatePanel {
     }
 
     public static JPanel createTrigPanel() {
-        JPanel trigPanel = new JPanel(new GridLayout(2, 3));
+        
+        JPanel trigPanel = new JPanel(new GridLayout(2, 3, 5, 5)); 
 
-        sin = CreateButton.createOperationButton("sin");
-        cos = CreateButton.createOperationButton("cos");
-        tan = CreateButton.createOperationButton("tan");
-        arcsin = CreateButton.createOperationButton("sin^-1");
-        arccos = CreateButton.createOperationButton("cos^-1");
-        arctan = CreateButton.createOperationButton("tan^-1");
+        // trig function custom color
+        Color trigButtonColor = new Color(255, 255, 153);
+
+        sin = createCustomButton("sin", trigButtonColor);
+        cos = createCustomButton("cos", trigButtonColor);
+        tan = createCustomButton("tan", trigButtonColor);
+        arcsin = createCustomButton("sin^-1", trigButtonColor);
+        arccos = createCustomButton("cos^-1", trigButtonColor);
+        arctan = createCustomButton("tan^-1", trigButtonColor);
 
         trigPanel.add(sin);
         trigPanel.add(cos);
@@ -107,12 +98,24 @@ public class CreatePanel {
         return trigPanel;
     }
 
-    public static JPanel createBasicFunctionPanel() {
-        JPanel basicFunctionPanel = new JPanel(new GridLayout(3, 1));
+    public static JButton createCustomButton(String text, Color backgroundColor) {
+        JButton button = new CreateButton(text);
+        button.setBackground(backgroundColor); 
+        button.setPreferredSize(new Dimension(100, 40)); 
+        return button;
+    }
 
-        sqrRt = CreateButton.createOperationButton("√");
-        sqr = CreateButton.createOperationButton("x*x");
-        inverse = CreateButton.createOperationButton("1/x");
+    public static JPanel createBasicFunctionPanel() {
+            
+        JPanel basicFunctionPanel = new JPanel(new GridLayout(3, 1, 5, 5)); 
+
+        //custom color for the common function buttons
+        Color commonFunctionButtonColor = new Color(204, 204, 204);
+
+        sqrRt = createCustomButtonFunc("√", commonFunctionButtonColor);
+        sqr = createCustomButtonFunc("x*x", commonFunctionButtonColor);
+        inverse = createCustomButtonFunc("1/x", commonFunctionButtonColor);
+
 
         basicFunctionPanel.add(sqrRt);
         basicFunctionPanel.add(sqr);
@@ -121,18 +124,24 @@ public class CreatePanel {
         return basicFunctionPanel;
     }
 
+    public static JButton createCustomButtonFunc(String text, Color backgroundColor) {
+        JButton button = new CreateButton(text);
+        button.setBackground(backgroundColor); 
+        button.setPreferredSize(new Dimension(60, 75)); 
+        return button;
+    }
+
     public static JPanel createCancelPanel() {
         JPanel cancelPanel = new JPanel();
 
         cancel = CreateButton.createOperationButton("C");
 
-         // Separate color scheme for the "C" button
+        // Separate color scheme for the "C" button
          cancel.setBackground(new Color(255, 204, 0)); // Orangish background
          cancel.setForeground(new Color(255, 255, 255)); // White text color
 
-          // For adjusting the button size
-        cancel.setPreferredSize(new Dimension(160, 90));
-
+        // For adjusting the button size
+        cancel.setPreferredSize(new Dimension(50,45));
 
         cancelPanel.add(cancel);
 
@@ -166,4 +175,5 @@ public class CreatePanel {
 
         return mainPanel;
     }
+
 }

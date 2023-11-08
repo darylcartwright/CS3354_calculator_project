@@ -18,5 +18,9 @@ public class CalculatorMain {
 	public static void main(String[] args) {
 		CalculatorUI uiCal = new CalculatorUI();
 		uiCal.init();
+/* 		for (int i = 0; i < 10; i++) {
+			System.out.println(CreatePanel.digitValue[i]);
+			System.out.println(CreatePanel.digitButtons[i].getText());
+		} */
 	}
 }
