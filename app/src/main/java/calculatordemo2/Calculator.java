@@ -95,6 +95,7 @@ public class Calculator{
 	 * @return
 	 */
 	public Double calcScience(singleOperator newMode, Double num) {
+
 		if (newMode == singleOperator.square) {
 			return num * num;
 		}
@@ -105,22 +106,23 @@ public class Calculator{
 			return 1 / num;
 		}
 		if (newMode == singleOperator.cos) {
-			return Math.cos(num);
+			return Math.cos(Math.toRadians(num));
 		}
+
 		if (newMode == singleOperator.sin) {
-			return Math.sin(num);
+			return Math.sin(Math.toRadians(num));
 		}
 		if (newMode == singleOperator.tan) {
-			return Math.tan(num);
+			return Math.tan(Math.toRadians(num));
 		}
 		if (newMode == singleOperator.arccos) {
-			return Math.acos(num);
+			return Math.toDegrees(Math.acos(num));
 		}
 		if (newMode == singleOperator.arcsin) {
-			return Math.asin(num);
+			return Math.toDegrees(Math.asin(num));
 		}
 		if (newMode == singleOperator.arctan) {
-			return Math.atan(num);
+			return Math.toDegrees(Math.atan(num));
 		}
 		// never reach
 		throw new Error();

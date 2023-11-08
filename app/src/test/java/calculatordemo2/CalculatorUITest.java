@@ -24,6 +24,7 @@ class CalculatorUITest {
         CreatePanel.createCancelPanel();
         CreatePanel.createBasicFunctionPanel();
         CreatePanel.createPrimitiveOperationPanel();
+        CreatePanel.createTrigPanel();
         classUnderTest = new CalculatorUI();
         jButtons = new JButton[10];
         for (int i = 0; i < 10; i++) {
@@ -229,7 +230,66 @@ class CalculatorUITest {
         // Reset the text field
         classUnderTest.text.setText("");
 
-        
+        // Sine: sin(30°) ≈ 0.5
+        // Simulate pressing buttons "3", "0", and "sin"
+        ActionEvent e1 = new ActionEvent(jButtons[3], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e2 = new ActionEvent(jButtons[0], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e3 = new ActionEvent(CreatePanel.sin, ActionEvent.ACTION_PERFORMED, "");
+
+        classUnderTest.actionPerformed(e1);
+        classUnderTest.actionPerformed(e2);
+        classUnderTest.actionPerformed(e3);
+
+        // Expected: The text field displays 0.5
+        double expectedValue = 0.5;
+        // Actual: Text displayed on the calculator, parsed as a double
+        double actualValue = Double.parseDouble(classUnderTest.text.getText());
+        // Tolerance for comparing double values
+        double epsilon = 1e-10;
+        // Verify that the expected value is within tolerance of the actual value
+        assertEquals(expectedValue, actualValue, epsilon, "Sine result matches the expected value with tolerance");
+    
+
+        // Reset the text field
+        classUnderTest.text.setText("");
+
+        // Cosine: cos(180°) ≈ -1.0
+        // Simulate pressing buttons "1", "8", "0", and "cos"
+        ActionEvent e4 = new ActionEvent(jButtons[1], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e5 = new ActionEvent(jButtons[8], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e6 = new ActionEvent(CreatePanel.cos, ActionEvent.ACTION_PERFORMED, "");
+
+        classUnderTest.actionPerformed(e4);
+        classUnderTest.actionPerformed(e5);
+        classUnderTest.actionPerformed(e2);
+        classUnderTest.actionPerformed(e6);
+
+        // Expected: The text field displays -1.0
+        expectedValue = -1.0;
+        // Actual: Text displayed on the calculator
+        actualValue = Double.parseDouble(classUnderTest.text.getText());
+        // Verify that the actual value is close to the expected value within epsilon
+        assertEquals(expectedValue, actualValue, epsilon, "Cosine result matches the expected value with tolerance");
+
+        // Reset the text field
+        classUnderTest.text.setText("");
+
+        // Tangent: tan(45°) = 1.0
+        // Simulate pressing buttons "4", "5", and "tan"
+        ActionEvent e7 = new ActionEvent(jButtons[4], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e8 = new ActionEvent(jButtons[5], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e9 = new ActionEvent(CreatePanel.tan, ActionEvent.ACTION_PERFORMED, "");
+
+        classUnderTest.actionPerformed(e7);
+        classUnderTest.actionPerformed(e8);
+        classUnderTest.actionPerformed(e9);
+
+        // Expected: The text field displays 1.0
+        expectedValue = 1.0;
+        // Actual: Text displayed on the calculator
+        actualValue = Double.parseDouble(classUnderTest.text.getText());
+        // Verify that the expected display matches the actual display
+        assertEquals(expectedValue, actualValue, epsilon, "Tangent result matches with expected value with tolerance");
     }
 
 

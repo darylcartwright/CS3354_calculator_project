@@ -38,42 +38,60 @@ class CalculatorTest {
     @Test
     void testCos() {
         double num = 45.0;
-        assertEquals(Math.cos(num), classUnderTest.calcScience(Calculator.singleOperator.cos, num));
+        double expectedResult = Math.cos(Math.toRadians(num));
+        double actualResult = classUnderTest.calcScience(Calculator.singleOperator.cos, num);
+    
+        assertEquals(expectedResult, actualResult, 1e-10, "Cosine result in degrees matches the expected value with tolerance");
     }
 
     @DisplayName("Tests the sine function in degrees")
     @Test
     void testSin() {
         double num = 30.0;
-        assertEquals(Math.sin(num), classUnderTest.calcScience(Calculator.singleOperator.sin, num));
-    }
+        double expectedResult = Math.sin(Math.toRadians(num));
+        double actualResult = classUnderTest.calcScience(Calculator.singleOperator.sin, num);
+
+        assertEquals(expectedResult, actualResult, 1e-10, "Sine result in degrees matches the expected value with tolerance");
+        }
 
     @DisplayName("Tests the tangent function in degrees")
     @Test
     void testTan() {
         double num = 60.0;
-        assertEquals(Math.tan(num), classUnderTest.calcScience(Calculator.singleOperator.tan, num));
+        double expectedResult = Math.tan(Math.toRadians(num));
+        double actualResult = classUnderTest.calcScience(Calculator.singleOperator.tan, num);
+        
+        assertEquals(expectedResult, actualResult, 1e-10, "Tangent result in degrees matches the expected value with tolerance");
     }
 
     @DisplayName("Tests the inverse sine function in degrees")
     @Test
     void testArcsin() {
         double num = 0.5;
-        assertEquals(Math.asin(num), classUnderTest.calcScience(Calculator.singleOperator.arcsin, num));
+        double expectedResult = Math.toDegrees(Math.asin(num));
+        double actualResult = classUnderTest.calcScience(Calculator.singleOperator.arcsin, num);
+    
+        assertEquals(expectedResult, actualResult, 1e-10, "Inverse sine result in degrees matches the expected value with tolerance");
     }
 
     @DisplayName("Tests the inverse cosine function in degrees")
     @Test
     void testArccos() {
         double num = 0.5;
-        assertEquals(Math.acos(num), classUnderTest.calcScience(Calculator.singleOperator.arccos, num));
+        double expectedResult = Math.toDegrees(Math.acos(num));
+        double actualResult = classUnderTest.calcScience(Calculator.singleOperator.arccos, num);
+    
+        assertEquals(expectedResult, actualResult, 1e-10, "Inverse cosine result in degrees matches the expected value with tolerance");
     }
 
     @DisplayName("Tests the inverse tangent function in degrees")
     @Test
     void testArctan() {
         double num = 0.5;
-        assertEquals(Math.atan(num), classUnderTest.calcScience(Calculator.singleOperator.arctan, num));
+        double expectedResult = Math.toDegrees(Math.atan(num));
+        double actualResult = classUnderTest.calcScience(Calculator.singleOperator.arctan, num);
+    
+        assertEquals(expectedResult, actualResult, 1e-10, "Inverse tangent result in degrees matches the expected value with tolerance");
     }
 
     @DisplayName("Tests whether an error is thrown if a null mode is passed")
