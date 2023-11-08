@@ -6,6 +6,7 @@ package calculatordemo2;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,11 +21,12 @@ class CalculatorUITest {
 
     @BeforeAll
     public static void setUp() {
+        CreatePanel.createMainPanel();
+        CreatePanel.createTrigPanel();
         CreatePanel.createDigitPanel();
         CreatePanel.createCancelPanel();
         CreatePanel.createBasicFunctionPanel();
         CreatePanel.createPrimitiveOperationPanel();
-        CreatePanel.createTrigPanel();
         classUnderTest = new CalculatorUI();
         jButtons = new JButton[10];
         for (int i = 0; i < 10; i++) {
@@ -32,6 +34,12 @@ class CalculatorUITest {
         }
         classUnderTest.text.setText("");
     }
+
+    @AfterEach
+    public void cleanUp() {
+        classUnderTest.text.setText("");
+    }
+
 
     @DisplayName("Testing that writer writes the display")
     @Test
@@ -95,22 +103,25 @@ class CalculatorUITest {
     public void displayThreeDigits() {
         // Reset the text field
         classUnderTest.text.setText("");
-
+    
         // Simulate pressing buttons "2", then "3", then "5"
         ActionEvent e1 = new ActionEvent(jButtons[2], ActionEvent.ACTION_PERFORMED, "");
         ActionEvent e2 = new ActionEvent(jButtons[3], ActionEvent.ACTION_PERFORMED, "");
         ActionEvent e3 = new ActionEvent(jButtons[5], ActionEvent.ACTION_PERFORMED, "");
+    
         classUnderTest.actionPerformed(e1);
         classUnderTest.actionPerformed(e2);
         classUnderTest.actionPerformed(e3);
-
+    
         // Expected: Text field displays "235"
         String expectedDisplayText = CreatePanel.digitValue[2] + CreatePanel.digitValue[3] + CreatePanel.digitValue[5];
         // Actual: Text displayed on the calculator
         String actualDisplayText = classUnderTest.text.getText();
+    
         // Verify that the expected display matches the actual display
         assertEquals(expectedDisplayText, actualDisplayText);
     }
+    
 
     @DisplayName("Testing Display after Addition Operation")
     @Test
@@ -241,13 +252,13 @@ class CalculatorUITest {
         classUnderTest.actionPerformed(e3);
 
         // Expected: The text field displays 0.5
-        double expectedValue = 0.5;
+        double expectedValueSin = 0.5;
         // Actual: Text displayed on the calculator, parsed as a double
-        double actualValue = Double.parseDouble(classUnderTest.text.getText());
+        double actualValueSin = Double.parseDouble(classUnderTest.text.getText());
         // Tolerance for comparing double values
         double epsilon = 1e-10;
         // Verify that the expected value is within tolerance of the actual value
-        assertEquals(expectedValue, actualValue, epsilon, "Sine result matches the expected value with tolerance");
+        assertEquals(expectedValueSin, actualValueSin, epsilon, "Sine result matches the expected value with tolerance");
     
 
         // Reset the text field
@@ -265,11 +276,11 @@ class CalculatorUITest {
         classUnderTest.actionPerformed(e6);
 
         // Expected: The text field displays -1.0
-        expectedValue = -1.0;
+        double expectedValueCos = -1.0;
         // Actual: Text displayed on the calculator
-        actualValue = Double.parseDouble(classUnderTest.text.getText());
+        double actualValueCos = Double.parseDouble(classUnderTest.text.getText());
         // Verify that the actual value is close to the expected value within epsilon
-        assertEquals(expectedValue, actualValue, epsilon, "Cosine result matches the expected value with tolerance");
+        assertEquals(expectedValueCos, actualValueCos, epsilon, "Cosine result matches the expected value with tolerance");
 
         // Reset the text field
         classUnderTest.text.setText("");
@@ -285,11 +296,11 @@ class CalculatorUITest {
         classUnderTest.actionPerformed(e9);
 
         // Expected: The text field displays 1.0
-        expectedValue = 1.0;
+        double expectedValueTan = 1.0;
         // Actual: Text displayed on the calculator
-        actualValue = Double.parseDouble(classUnderTest.text.getText());
+        double actualValueTan = Double.parseDouble(classUnderTest.text.getText());
         // Verify that the expected display matches the actual display
-        assertEquals(expectedValue, actualValue, epsilon, "Tangent result matches with expected value with tolerance");
+        assertEquals(expectedValueTan, actualValueTan, epsilon, "Tangent result matches with expected value with tolerance");
     }
 
 

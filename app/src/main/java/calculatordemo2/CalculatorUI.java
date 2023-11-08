@@ -1,6 +1,5 @@
 package calculatordemo2;
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,6 +21,7 @@ import calculatordemo2.panel.CreatePanel;
 public class CalculatorUI implements ActionListener {
 	private final JFrame frame;
     private final JPanel mainPanel;
+	//private final JPanel buttonPanel;
     private final Calculator calc;
 	//Added for testing purpose
 	final JTextArea text;
@@ -32,9 +32,9 @@ public class CalculatorUI implements ActionListener {
 	public CalculatorUI() {
 		frame = new JFrame("Calculator");
 		frame.setResizable(true);
-		text = new JTextArea(2, 25);
-		mainPanel = new JPanel(new FlowLayout());
+		mainPanel = CreatePanel.createMainPanel();
 		calc = new Calculator();
+		text = CreatePanel.text;
 
 	}
 
@@ -46,7 +46,7 @@ public class CalculatorUI implements ActionListener {
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		//Added seperate action listener methods
-		addComponentsToMainPanel();
+		
         addDigitButtonListeners();
         addActionListenersForOperators();
         addActionListenerForEqual();
@@ -57,20 +57,6 @@ public class CalculatorUI implements ActionListener {
 
 	}
 
-	private void addComponentsToMainPanel() {
-		JPanel digitPanel = CreatePanel.createDigitPanel();
-        JPanel primitiveOperationsPanel = CreatePanel.createPrimitiveOperationPanel();
-        JPanel trigPanel = CreatePanel.createTrigPanel();
-        JPanel basicFunctionPanel = CreatePanel.createBasicFunctionPanel();
-        JPanel cancelPanel = CreatePanel.createCancelPanel();
-
-        mainPanel.add(text);
-        mainPanel.add(digitPanel);
-        mainPanel.add(primitiveOperationsPanel);
-        mainPanel.add(trigPanel);
-        mainPanel.add(basicFunctionPanel);
-        mainPanel.add(cancelPanel);
-    }
 
 	private void addDigitButtonListeners() {
 		for (int i = 0; i < 10; i++) {

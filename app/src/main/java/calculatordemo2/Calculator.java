@@ -108,7 +108,6 @@ public class Calculator{
 		if (newMode == singleOperator.cos) {
 			return Math.cos(Math.toRadians(num));
 		}
-
 		if (newMode == singleOperator.sin) {
 			return Math.sin(Math.toRadians(num));
 		}

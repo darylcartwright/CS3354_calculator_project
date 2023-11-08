@@ -2,8 +2,9 @@ package calculatordemo2.panel;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import javax.swing.JTextArea;
 import calculatordemo2.button.*;
 
 public class CreatePanel {
@@ -16,14 +17,28 @@ public class CreatePanel {
     public static JButton sin, cos, tan, arcsin, arccos, arctan;
     public static JButton sqrRt, sqr, inverse;
     public static JButton cancel;
+    public static JTextArea text;
 
     public static JPanel createDigitPanel() {
         JPanel digitPanel = new JPanel(new GridLayout(4, 3));
+        JPanel cancelPanel = createCancelPanel();
 
         for (int i = 0; i < 10; i++) {
             digitButtons[i] = new CreateButton(digitValue[i]);
-            digitPanel.add(digitButtons[i]);
         }
+
+        digitPanel.add(digitButtons[7]);
+        digitPanel.add(digitButtons[8]);
+        digitPanel.add(digitButtons[9]);
+        digitPanel.add(digitButtons[4]);
+        digitPanel.add(digitButtons[5]);
+        digitPanel.add(digitButtons[6]);
+        digitPanel.add(digitButtons[1]);
+        digitPanel.add(digitButtons[2]);
+        digitPanel.add(digitButtons[3]);
+        digitPanel.add(digitButtons[0]);
+        
+        digitPanel.add(cancelPanel);
 
         return digitPanel;
     }
@@ -67,7 +82,7 @@ public class CreatePanel {
     }
 
     public static JPanel createBasicFunctionPanel() {
-        JPanel basicFunctionPanel = new JPanel(new FlowLayout());
+        JPanel basicFunctionPanel = new JPanel(new GridLayout(3, 1));
 
         sqrRt = CreateButton.createOperationButton("√");
         sqr = CreateButton.createOperationButton("x*x");
@@ -81,7 +96,7 @@ public class CreatePanel {
     }
 
     public static JPanel createCancelPanel() {
-        JPanel cancelPanel = new JPanel(new FlowLayout());
+        JPanel cancelPanel = new JPanel();
 
         cancel = CreateButton.createOperationButton("C");
 
@@ -89,5 +104,32 @@ public class CreatePanel {
 
         return cancelPanel;
     }
-    
+
+    public static JPanel createButtonPanel() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BorderLayout());
+        JPanel trigPanel = createTrigPanel();
+        JPanel digitPanel = createDigitPanel();
+        JPanel basicFunctionPanel = createBasicFunctionPanel();
+        JPanel primitiveOperationPanel = createPrimitiveOperationPanel();
+
+        buttonPanel.add(trigPanel, BorderLayout.NORTH);
+        buttonPanel.add(digitPanel, BorderLayout.CENTER);
+        buttonPanel.add(basicFunctionPanel, BorderLayout.WEST);
+        buttonPanel.add(primitiveOperationPanel, BorderLayout.EAST);
+
+        return buttonPanel;
+    }
+
+    public static JPanel createMainPanel() {
+        text = new JTextArea();
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        JPanel buttonPanel = createButtonPanel();
+
+        mainPanel.add(text, BorderLayout.NORTH);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        return mainPanel;
+    }
 }
