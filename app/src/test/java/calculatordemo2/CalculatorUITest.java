@@ -80,15 +80,17 @@ class CalculatorUITest {
         assertEquals(expectedDisplayText, actualDisplayText);
     }
     
-    @DisplayName("Testing Display of Two Digit Buttons")
+    @DisplayName("Testing Display of Three Digit Buttons")
     @Test
-    public void displayTwoDigits() {
+    public void displayThreeDigits() {
         classUnderTest.text.setText("");
         ActionEvent e1 = new ActionEvent(jButtons[2], ActionEvent.ACTION_PERFORMED, "");
         ActionEvent e2 = new ActionEvent(jButtons[3], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e3 = new ActionEvent(jButtons[5], ActionEvent.ACTION_PERFORMED, "");
         classUnderTest.actionPerformed(e1);
         classUnderTest.actionPerformed(e2);
-        String expectedDisplayText = CreatePanel.digitValue[2] + CreatePanel.digitValue[3];
+        classUnderTest.actionPerformed(e3);
+        String expectedDisplayText = CreatePanel.digitValue[2] + CreatePanel.digitValue[3] + CreatePanel.digitValue[5];
         String actualDisplayText = classUnderTest.text.getText();
         assertEquals(expectedDisplayText, actualDisplayText);
     }
