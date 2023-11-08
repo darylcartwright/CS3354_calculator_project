@@ -109,64 +109,63 @@ public class CalculatorUI implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		final Object source = e.getSource();
-		String currentText = text.getText(); // Get the current text from the text field
-		
+		Object source = e.getSource();
+		String currentText = text.getText();
 	
-		// check 0-9 and update textfield
+		// Handle digit buttons (buttons 0 to 9)
 		for (int i = 0; i < 10; i++) {
 			JButton digitButton = CreatePanel.digitButtons[i];
 			if (source == digitButton) {
 				String digitValue = CreatePanel.digitValue[i];
-				if (currentText.isEmpty()) {
-					// If the text field is empty, set the current digit value as the text
-					text.setText(digitValue);
-				} else {
-					// If the text field is not empty, concatenate the current text with the digit value
-					text.replaceSelection(digitValue);
-				}
-				return;
+				currentText = text.getText();
+				text.setText(currentText + digitValue);
+				return; // Exit the method after handling the button click
 			}
 		}
 
-		// .
+		// Some of the following operations have the text cleared afterwards to prevent accidental appending of digits.
 		if (source == CreatePanel.add) {
 			writer(calc.twoOpCaller(Calculator.twoOperator.add, reader()));
+			text.setText(""); 
 		}
 		if (source == CreatePanel.sub) {
 			writer(calc.twoOpCaller(Calculator.twoOperator.subtract, reader()));
+			text.setText(""); 
 		}
 		if (source == CreatePanel.mult) {
-			writer(calc.twoOpCaller(Calculator.twoOperator.multiply,
-					reader()));
+			writer(calc.twoOpCaller(Calculator.twoOperator.multiply, reader()));
+			text.setText("");
 		}
 		if (source == CreatePanel.div) {
 			writer(calc.twoOpCaller(Calculator.twoOperator.divide, reader()));
+			text.setText("");
 		}
 		if (source == CreatePanel.sqr) {
-			writer(calc.calcScience(Calculator.singleOperator.square,
-					reader()));
+			writer(calc.calcScience(Calculator.singleOperator.square, reader()));
 		}
 		if (source == CreatePanel.sqrRt) {
-			writer(calc.calcScience(Calculator.singleOperator.squareRoot,
-					reader()));
+			writer(calc.calcScience(Calculator.singleOperator.squareRoot, reader()));
 		}
 		if (source == CreatePanel.inverse) {
-			writer(calc.calcScience(
-					Calculator.singleOperator.oneDividedBy, reader()));
+			writer(calc.calcScience(Calculator.singleOperator.oneDividedBy, reader()));
 		}
 		if (source == CreatePanel.cos) {
-			writer(calc.calcScience(Calculator.singleOperator.cos,
-					reader()));
+			writer(calc.calcScience(Calculator.singleOperator.cos, reader()));
 		}
 		if (source == CreatePanel.sin) {
-			writer(calc.calcScience(Calculator.singleOperator.sin,
-					reader()));
+			writer(calc.calcScience(Calculator.singleOperator.sin, reader()));
 		}
-
 		if (source == CreatePanel.tan) {
-			writer(calc.calcScience(Calculator.singleOperator.tan,
-					reader()));
+			writer(calc.calcScience(Calculator.singleOperator.tan, reader()));
+		}
+		if (source == CreatePanel.arccos) {
+			writer(calc.calcScience(Calculator.singleOperator.arccos, reader()));
+		}
+		if (source == CreatePanel.arcsin) {
+			writer(calc.calcScience(Calculator.singleOperator.arcsin, reader()));
+		}
+		if (source == CreatePanel.arctan) {
+			writer(calc.calcScience(Calculator.singleOperator.arctan, reader()));
 		}
 		if (source == CreatePanel.equal) {
 			writer(calc.calculateEqual(reader()));
@@ -174,8 +173,10 @@ public class CalculatorUI implements ActionListener {
 		if (source == CreatePanel.cancel) {
 			writer(calc.reset());
 		}
+
 		// for easy continued calculations/copy
 		text.selectAll();
+
 	}
 
 	/**
@@ -197,9 +198,9 @@ public class CalculatorUI implements ActionListener {
 	 */
 	public void writer(final Double num) {
 		if (Double.isNaN(num)) {
-			text.setText("");
+			text.setText(""); // Clear the text field if the result is NaN
 		} else {
-			text.setText(Double.toString(num));
+			text.setText(Double.toString(num)); // Set the text field with the number
 		}
 	}
 }

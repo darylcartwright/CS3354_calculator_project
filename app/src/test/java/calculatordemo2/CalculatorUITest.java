@@ -22,6 +22,8 @@ class CalculatorUITest {
     public static void setUp() {
         CreatePanel.createDigitPanel();
         CreatePanel.createCancelPanel();
+        CreatePanel.createBasicFunctionPanel();
+        CreatePanel.createPrimitiveOperationPanel();
         classUnderTest = new CalculatorUI();
         jButtons = new JButton[10];
         for (int i = 0; i < 10; i++) {
@@ -72,38 +74,180 @@ class CalculatorUITest {
     @DisplayName("Testing Display of Single Digit Button")
     @Test
     public void displaySingleDigit() {
+        // Reset text field
         classUnderTest.text.setText("");
+
+        // Simulate pressing the "1" button
         ActionEvent e = new ActionEvent(jButtons[1], ActionEvent.ACTION_PERFORMED, "");
         classUnderTest.actionPerformed(e);
+
+        // Expected: Text field displays "1"
         String expectedDisplayText = CreatePanel.digitValue[1];
+        // Actual: Text displayed on the calculator
         String actualDisplayText = classUnderTest.text.getText();
+        // Verify that the expected display matches the actual display
         assertEquals(expectedDisplayText, actualDisplayText);
     }
     
     @DisplayName("Testing Display of Three Digit Buttons")
     @Test
     public void displayThreeDigits() {
+        // Reset the text field
         classUnderTest.text.setText("");
+
+        // Simulate pressing buttons "2", then "3", then "5"
         ActionEvent e1 = new ActionEvent(jButtons[2], ActionEvent.ACTION_PERFORMED, "");
         ActionEvent e2 = new ActionEvent(jButtons[3], ActionEvent.ACTION_PERFORMED, "");
         ActionEvent e3 = new ActionEvent(jButtons[5], ActionEvent.ACTION_PERFORMED, "");
         classUnderTest.actionPerformed(e1);
         classUnderTest.actionPerformed(e2);
         classUnderTest.actionPerformed(e3);
+
+        // Expected: Text field displays "235"
         String expectedDisplayText = CreatePanel.digitValue[2] + CreatePanel.digitValue[3] + CreatePanel.digitValue[5];
+        // Actual: Text displayed on the calculator
         String actualDisplayText = classUnderTest.text.getText();
+        // Verify that the expected display matches the actual display
         assertEquals(expectedDisplayText, actualDisplayText);
     }
+
+    @DisplayName("Testing Display after Addition Operation")
+    @Test
+    public void addOperationDisplay() {
+        // Reset the text field
+        classUnderTest.text.setText("");
+
+        // Simulate pressing the buttons "6" "+" "8" "="
+        ActionEvent e1 = new ActionEvent(jButtons[6], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e2 = new ActionEvent(CreatePanel.add, ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e3 = new ActionEvent(jButtons[8], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e4 = new ActionEvent(CreatePanel.equal, ActionEvent.ACTION_PERFORMED, "");
+
+        classUnderTest.actionPerformed(e1);
+        classUnderTest.actionPerformed(e2);
+        classUnderTest.actionPerformed(e3);
+        classUnderTest.actionPerformed(e4);
+
+        // Expected: Text field displays "14.0"
+        String expectedDisplayText = "14.0";
+        // Actual: Text displayed on the calculator
+        String actualDisplayText = classUnderTest.text.getText();
+        // Verify that the expected display matches the actual display
+        assertEquals(expectedDisplayText, actualDisplayText);
+    }
+
+    @DisplayName("Testing Display after Subtraction Operation")
+    @Test
+    public void subOperationDisplay() {
+        // Reset the text field
+        classUnderTest.text.setText("");
+
+        // Simulate pressing the buttons "7" "-" "9" "="
+        ActionEvent e1 = new ActionEvent(jButtons[7], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e2 = new ActionEvent(CreatePanel.sub, ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e3 = new ActionEvent(jButtons[9], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e4 = new ActionEvent(CreatePanel.equal, ActionEvent.ACTION_PERFORMED, "");
+
+        classUnderTest.actionPerformed(e1);
+        classUnderTest.actionPerformed(e2);
+        classUnderTest.actionPerformed(e3);
+        classUnderTest.actionPerformed(e4);
+
+        // Expected: Text field displays "-2.0"
+        String expectedDisplayText = "-2.0";
+        // Actual: Text displayed on the calculator
+        String actualDisplayText = classUnderTest.text.getText();
+        // Verify that the expected display matches the actual display
+        assertEquals(expectedDisplayText, actualDisplayText);
+    } 
+
+    @DisplayName("Testing Display after Square Root Operation")
+    @Test
+    public void sqrRtOperationDisplay() {
+        // Reset the text field
+        classUnderTest.text.setText("");
+
+        // Simulate pressing the buttons "1" "0" "0" "sqrRt"
+        ActionEvent e1 = new ActionEvent(jButtons[1], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e2 = new ActionEvent(jButtons[0], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e3 = new ActionEvent(CreatePanel.sqrRt, ActionEvent.ACTION_PERFORMED,"");
+
+        classUnderTest.actionPerformed(e1);
+        classUnderTest.actionPerformed(e2);
+        classUnderTest.actionPerformed(e2);
+        classUnderTest.actionPerformed(e3);
+
+        // Expected: Text field displays "10.0"
+        String expectedDisplayText = "10.0";
+        // Actual: Text displayed on the calculator
+        String actualDisplayText = classUnderTest.text.getText();
+        // Verify that the expected display matches the actual display
+        assertEquals(expectedDisplayText, actualDisplayText);
+    }
+
+    @DisplayName("Testing Display after Multiple Primitive Operations")
+    @Test
+    public void complexOperationsDisplay() {
+        // Reset the text field
+        classUnderTest.text.setText("");
+
+        // Simulate pressing the buttons "2" "+" "3" "*" "4" "-" "6" "/" "2" "="
+        ActionEvent e1 = new ActionEvent(jButtons[2], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e2 = new ActionEvent(CreatePanel.add, ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e3 = new ActionEvent(jButtons[3], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e4 = new ActionEvent(CreatePanel.mult, ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e5 = new ActionEvent(jButtons[4], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e6 = new ActionEvent(CreatePanel.sub, ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e7 = new ActionEvent(jButtons[6], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e8 = new ActionEvent(CreatePanel.div, ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e9 = new ActionEvent(jButtons[2], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e10 = new ActionEvent(CreatePanel.equal, ActionEvent.ACTION_PERFORMED, "");
+
+        classUnderTest.actionPerformed(e1);
+        classUnderTest.actionPerformed(e2);
+        classUnderTest.actionPerformed(e3);
+        classUnderTest.actionPerformed(e4);
+        classUnderTest.actionPerformed(e5);
+        classUnderTest.actionPerformed(e6);
+        classUnderTest.actionPerformed(e7);
+        classUnderTest.actionPerformed(e8);
+        classUnderTest.actionPerformed(e9);
+        classUnderTest.actionPerformed(e10);
+
+        // Expected: Text field displays "7.0"
+        String expectedDisplayText = "7.0";
+        // Actual: Text displayed on the calculator
+        String actualDisplayText = classUnderTest.text.getText();
+        // Verify that the expected display matches the actual display
+        assertEquals(expectedDisplayText, actualDisplayText);
+    }
+
+
+    @DisplayName("Testing Display after Trig Functions")
+    @Test
+    public void trigFunctionsDisplay() {
+        // Reset the text field
+        classUnderTest.text.setText("");
+
+        
+    }
+
 
     @DisplayName("Testing Display after Cancel Button")
     @Test
     public void clearDisplay() {
+        // Simulate pressing the buttons "4" "C" (cancel)
         ActionEvent e1 = new ActionEvent(CreatePanel.digitButtons[4], ActionEvent.ACTION_PERFORMED, "");
         ActionEvent e2 = new ActionEvent(CreatePanel.cancel, ActionEvent.ACTION_PERFORMED, "");
+
         classUnderTest.actionPerformed(e1);
         classUnderTest.actionPerformed(e2);
+
+        // Expected: Text field displays ""
         String expectedDisplayText = "";
+        // Actual: Text displayed on the calculator
         String actualDisplayText = classUnderTest.text.getText();
+        // Verify that the expected display matches the actual display
         assertEquals(expectedDisplayText, actualDisplayText);
     }
 
