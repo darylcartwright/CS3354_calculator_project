@@ -42,7 +42,7 @@ public class CalculatorUI implements ActionListener {
 	 * Initializes and sets the frame size, buttons, panels. The main runner method of the UI class.
 	 */
 	public void init() {
-		frame.setSize(300, 340);
+		frame.setSize(500, 550);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		//Added seperate action listener methods

@@ -29,20 +29,6 @@ public class CreatePanel {
             digitButtons[i] = CreateButton.createDigitButton(digitValue[i]);
         }
 
-       for (int i = 0; i < 10; i++) {
-        digitButtons[i] = new CreateButton(digitValue[i]);
-        digitButtons[i].setBackground(new Color(153, 153, 153)); 
-    }
-        JPanel cancelPanel = createCancelPanel();
-
-        // Custom JPanel for the '0' button to set its size
-        JPanel zeroPanel = new JPanel(new BorderLayout());
-        zero = new CreateButton(digitValue[0]);
-        zero.setBackground(new Color(255, 153, 0)); //Orange background color
-        zeroPanel.add(zero, BorderLayout.CENTER);
-        zeroPanel.setPreferredSize(new Dimension(20, 30)); // To make it twice as wide
-
-
         digitPanel.add(digitButtons[7]);
         digitPanel.add(digitButtons[8]);
         digitPanel.add(digitButtons[9]);
@@ -57,7 +43,6 @@ public class CreatePanel {
         digitPanel.add(zeroPanel);
 
 
-        // Clear button (same width as a regular button)
         JPanel cancelPanel = createCancelPanel();
         //cancel.setForeground(Color.BLACK);
         digitPanel.add(cancelPanel);
@@ -71,8 +56,6 @@ public class CreatePanel {
         digitButtons[0] = zero;
         zeroPanel.add(zero);
         return zeroPanel;
-
-
     }
     
 
@@ -160,6 +143,7 @@ public class CreatePanel {
 
     public static JPanel createMainPanel() {
         text = new JTextArea();
+        text.setPreferredSize(new Dimension(200, 50));
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         JPanel buttonPanel = createButtonPanel();
