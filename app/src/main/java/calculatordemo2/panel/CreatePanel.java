@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JTextArea;
-import calculatordemo2.button.*;
+import calculatordemo2.button.CreateButton;
 
 public class CreatePanel {
     public static final String[] digitValue = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
@@ -23,7 +23,11 @@ public class CreatePanel {
     public static JTextArea text;
 
     public static JPanel createDigitPanel() {
-       JPanel digitPanel = new JPanel(new GridLayout(4, 3, 5, 5)); 
+        JPanel digitPanel = new JPanel(new GridLayout(4, 3, 5, 5)); 
+    
+        for (int i = 1; i <= 9; i++) {
+            digitButtons[i] = CreateButton.createDigitButton(digitValue[i]);
+        }
 
        for (int i = 0; i < 10; i++) {
         digitButtons[i] = new CreateButton(digitValue[i]);
@@ -48,22 +52,39 @@ public class CreatePanel {
         digitPanel.add(digitButtons[1]);
         digitPanel.add(digitButtons[2]);
         digitPanel.add(digitButtons[3]);
-        digitPanel.add(zero); 
-        
-       digitPanel.add(cancelPanel);
+    
+        JPanel zeroPanel = createZeroPanel();
+        digitPanel.add(zeroPanel);
 
+
+        // Clear button (same width as a regular button)
+        JPanel cancelPanel = createCancelPanel();
+        //cancel.setForeground(Color.BLACK);
+        digitPanel.add(cancelPanel);
+    
         return digitPanel;
     }
+
+    public static JPanel createZeroPanel() {
+        JPanel zeroPanel = new JPanel();
+        zero = CreateButton.createZeroButton(digitValue[0]);
+        digitButtons[0] = zero;
+        zeroPanel.add(zero);
+        return zeroPanel;
+
+
+    }
+    
 
     public static JPanel createPrimitiveOperationPanel() {
   
         JPanel primitiveOperationPanel = new JPanel(new GridLayout(5, 1, 5, 5)); 
 
-        add = CreateButton.createOperationButton("+");
-        sub = CreateButton.createOperationButton("-");
-        mult = CreateButton.createOperationButton("*");
-        div = CreateButton.createOperationButton("/");
-        equal = CreateButton.createOperationButton("=");
+        add = CreateButton.createPrimitiveOperationButton("+");
+        sub = CreateButton.createPrimitiveOperationButton("-");
+        mult = CreateButton.createPrimitiveOperationButton("*");
+        div = CreateButton.createPrimitiveOperationButton("/");
+        equal = CreateButton.createPrimitiveOperationButton("=");
 
         primitiveOperationPanel.add(add);
         primitiveOperationPanel.add(sub);
@@ -78,15 +99,12 @@ public class CreatePanel {
         
         JPanel trigPanel = new JPanel(new GridLayout(2, 3, 5, 5)); 
 
-        // trig function custom color
-        Color trigButtonColor = new Color(255, 255, 153);
-
-        sin = createCustomButton("sin", trigButtonColor);
-        cos = createCustomButton("cos", trigButtonColor);
-        tan = createCustomButton("tan", trigButtonColor);
-        arcsin = createCustomButton("sin^-1", trigButtonColor);
-        arccos = createCustomButton("cos^-1", trigButtonColor);
-        arctan = createCustomButton("tan^-1", trigButtonColor);
+        sin = CreateButton.createTrigButton("sin");
+        cos = CreateButton.createTrigButton("cos");
+        tan = CreateButton.createTrigButton("tan");
+        arcsin = CreateButton.createTrigButton("sin^-1");
+        arccos = CreateButton.createTrigButton("cos^-1");
+        arctan = CreateButton.createTrigButton("tan^-1");
 
         trigPanel.add(sin);
         trigPanel.add(cos);
@@ -98,23 +116,13 @@ public class CreatePanel {
         return trigPanel;
     }
 
-    public static JButton createCustomButton(String text, Color backgroundColor) {
-        JButton button = new CreateButton(text);
-        button.setBackground(backgroundColor); 
-        button.setPreferredSize(new Dimension(100, 40)); 
-        return button;
-    }
-
     public static JPanel createBasicFunctionPanel() {
             
         JPanel basicFunctionPanel = new JPanel(new GridLayout(3, 1, 5, 5)); 
 
-        //custom color for the common function buttons
-        Color commonFunctionButtonColor = new Color(204, 204, 204);
-
-        sqrRt = createCustomButtonFunc("√", commonFunctionButtonColor);
-        sqr = createCustomButtonFunc("x*x", commonFunctionButtonColor);
-        inverse = createCustomButtonFunc("1/x", commonFunctionButtonColor);
+        sqrRt = CreateButton.createBasicFunctionButton("√");
+        sqr = CreateButton.createBasicFunctionButton("x*x");
+        inverse = CreateButton.createBasicFunctionButton("1/x");
 
 
         basicFunctionPanel.add(sqrRt);
@@ -124,24 +132,10 @@ public class CreatePanel {
         return basicFunctionPanel;
     }
 
-    public static JButton createCustomButtonFunc(String text, Color backgroundColor) {
-        JButton button = new CreateButton(text);
-        button.setBackground(backgroundColor); 
-        button.setPreferredSize(new Dimension(60, 75)); 
-        return button;
-    }
-
     public static JPanel createCancelPanel() {
         JPanel cancelPanel = new JPanel();
 
-        cancel = CreateButton.createOperationButton("C");
-
-        // Separate color scheme for the "C" button
-         cancel.setBackground(new Color(255, 204, 0)); // Orangish background
-         cancel.setForeground(new Color(255, 255, 255)); // White text color
-
-        // For adjusting the button size
-        cancel.setPreferredSize(new Dimension(50,45));
+        cancel = CreateButton.createCancelButton("C");
 
         cancelPanel.add(cancel);
 
