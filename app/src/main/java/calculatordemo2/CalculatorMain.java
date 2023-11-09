@@ -12,7 +12,6 @@ package calculatordemo2;
  * @author Soria, Steckler, Tesic, Metsis
  */
 
-import calculatordemo2.panel.CreatePanel;
 public class CalculatorMain {
 
 	public static void main(String[] args) {
