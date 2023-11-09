@@ -21,9 +21,10 @@ import calculatordemo2.panel.CreatePanel;
 public class CalculatorUI implements ActionListener {
 	private final JFrame frame;
     private final JPanel mainPanel;
-	//private final JPanel buttonPanel;
     private final Calculator calc;
-	//Added for testing purpose
+	public final int FRAME_WIDTH;
+	public final int FRAME_HEIGHT;
+	// Added for testing purpose
 	final JTextArea text;
 
 	/**
@@ -35,28 +36,26 @@ public class CalculatorUI implements ActionListener {
 		mainPanel = CreatePanel.createMainPanel();
 		calc = new Calculator();
 		text = CreatePanel.text;
-
+		FRAME_WIDTH = 600;
+		FRAME_HEIGHT = 700;
 	}
 
 	/**
 	 * Initializes and sets the frame size, buttons, panels. The main runner method of the UI class.
 	 */
 	public void init() {
-		frame.setSize(500, 550);
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		//Added seperate action listener methods
 		
         addDigitButtonListeners();
         addActionListenersForOperators();
-        addActionListenerForEqual();
-        addActionListenerForCancel();
 
 		frame.add(mainPanel);
 		frame.setVisible(true);
 
 	}
-
 
 	private void addDigitButtonListeners() {
 		for (int i = 0; i < 10; i++) {
@@ -66,28 +65,16 @@ public class CalculatorUI implements ActionListener {
 	}
 
 	private void addActionListenersForOperators() {
-        CreatePanel.add.addActionListener(this);
-        CreatePanel.sub.addActionListener(this);
-        CreatePanel.mult.addActionListener(this);
-        CreatePanel.div.addActionListener(this);
-        CreatePanel.sqr.addActionListener(this);
-        CreatePanel.sqrRt.addActionListener(this);
-        CreatePanel.inverse.addActionListener(this);
-        CreatePanel.cos.addActionListener(this);
-        CreatePanel.sin.addActionListener(this);
-        CreatePanel.tan.addActionListener(this);
-		CreatePanel.arcsin.addActionListener(this);
-		CreatePanel.arccos.addActionListener(this);
-		CreatePanel.arctan.addActionListener(this);
-	}
-		
-	private void addActionListenerForEqual() {
-        CreatePanel.equal.addActionListener(this);
-    }
+		JButton[] operationButtons = {CreatePanel.add, CreatePanel.sub, CreatePanel.mult, CreatePanel.div, CreatePanel.equal, 
+										CreatePanel.sqr, CreatePanel.sqrRt, CreatePanel.inverse,
+										CreatePanel.cos, CreatePanel.sin, CreatePanel.tan, 
+										CreatePanel.arcsin, CreatePanel.arccos, CreatePanel.arctan,
+										CreatePanel.cancel};
 
-    private void addActionListenerForCancel() {
-        CreatePanel.cancel.addActionListener(this);
-    }
+		for (JButton button : operationButtons) {
+			button.addActionListener(this);
+		}
+	}
 
 	/**
 	 * Event handling implementation for Calculator button pressing

@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JTextArea;
@@ -23,7 +22,7 @@ public class CreatePanel {
     public static JTextArea text;
 
     public static JPanel createDigitPanel() {
-        JPanel digitPanel = new JPanel(new GridLayout(4, 3, 5, 5)); 
+        JPanel digitPanel = new JPanel(new GridLayout(4, 3, 0, 0)); 
     
         for (int i = 1; i <= 9; i++) {
             digitButtons[i] = CreateButton.createDigitButton(digitValue[i]);
@@ -44,7 +43,6 @@ public class CreatePanel {
 
 
         JPanel cancelPanel = createCancelPanel();
-        //cancel.setForeground(Color.BLACK);
         digitPanel.add(cancelPanel);
     
         return digitPanel;
@@ -61,7 +59,7 @@ public class CreatePanel {
 
     public static JPanel createPrimitiveOperationPanel() {
   
-        JPanel primitiveOperationPanel = new JPanel(new GridLayout(5, 1, 5, 5)); 
+        JPanel primitiveOperationPanel = new JPanel(new GridLayout(5, 1, 0, 0)); 
 
         add = CreateButton.createPrimitiveOperationButton("+");
         sub = CreateButton.createPrimitiveOperationButton("-");
@@ -80,7 +78,7 @@ public class CreatePanel {
 
     public static JPanel createTrigPanel() {
         
-        JPanel trigPanel = new JPanel(new GridLayout(2, 3, 5, 5)); 
+        JPanel trigPanel = new JPanel(new GridLayout(2, 3, 0, 0)); 
 
         sin = CreateButton.createTrigButton("sin");
         cos = CreateButton.createTrigButton("cos");
@@ -101,7 +99,7 @@ public class CreatePanel {
 
     public static JPanel createBasicFunctionPanel() {
             
-        JPanel basicFunctionPanel = new JPanel(new GridLayout(3, 1, 5, 5)); 
+        JPanel basicFunctionPanel = new JPanel(new GridLayout(3, 1, 0, 0)); 
 
         sqrRt = CreateButton.createBasicFunctionButton("√");
         sqr = CreateButton.createBasicFunctionButton("x*x");
