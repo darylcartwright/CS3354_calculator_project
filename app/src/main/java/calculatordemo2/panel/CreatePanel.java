@@ -23,12 +23,14 @@ public class CreatePanel {
     public static JTextArea text;
 
     public static JPanel createOneToNinePanel() {
-        JPanel oneToNinePanel = new JPanel(new GridLayout(3, 3, 0, 0)); 
-    
+        JPanel oneToNinePanel = new JPanel(new GridLayout(3, 3, 0, 0));     // 3 x 3 grid for 1-9
+        
+        // Creating digit buttons with number labels
         for (int i = 1; i <= 9; i++) {
             digitButtons[i] = CreateButton.createDigitButton(digitValue[i]);
         }
 
+        // Add digit buttons to grid
         oneToNinePanel.add(digitButtons[7]);
         oneToNinePanel.add(digitButtons[8]);
         oneToNinePanel.add(digitButtons[9]);
@@ -42,19 +44,6 @@ public class CreatePanel {
         return oneToNinePanel;
     }
 
-    public static JPanel createDigitPanel() {
-        JPanel digitPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        JPanel oneToNinePanel = createOneToNinePanel();
-        JPanel zeroCancelPanel = createZeroCancelPanel();
-
-        digitPanel.add(oneToNinePanel);
-        digitPanel.add(zeroCancelPanel);
-    
-        return digitPanel;
-    }
-
-
-
     public static JPanel createZeroCancelPanel() {
         JPanel zeroCancelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         zero = CreateButton.createZeroButton(digitValue[0]);
@@ -66,6 +55,17 @@ public class CreatePanel {
         zeroCancelPanel.add(cancel);
 
         return zeroCancelPanel;
+    }
+
+        public static JPanel createDigitPanel() {
+        JPanel digitPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        JPanel oneToNinePanel = createOneToNinePanel();
+        JPanel zeroCancelPanel = createZeroCancelPanel();
+
+        digitPanel.add(oneToNinePanel);
+        digitPanel.add(zeroCancelPanel);
+    
+        return digitPanel;
     }
     
 
@@ -143,7 +143,7 @@ public class CreatePanel {
 
     public static JPanel createMainPanel() {
         text = new JTextArea();
-        text.setPreferredSize(new Dimension(200, 50));
+        text.setPreferredSize(new Dimension(200, 100));
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         JPanel buttonPanel = createButtonPanel();

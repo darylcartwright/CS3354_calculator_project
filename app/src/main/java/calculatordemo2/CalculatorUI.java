@@ -37,7 +37,7 @@ public class CalculatorUI implements ActionListener {
 		calc = new Calculator();
 		text = CreatePanel.text;
 		FRAME_WIDTH = 500;
-		FRAME_HEIGHT = 700;
+		FRAME_HEIGHT = 625;
 	}
 
 	/**

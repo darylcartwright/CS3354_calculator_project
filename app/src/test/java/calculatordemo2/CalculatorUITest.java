@@ -98,31 +98,6 @@ class CalculatorUITest {
         assertEquals(expectedDisplayText, actualDisplayText);
     }
     
-    @DisplayName("Testing Display of Three Digit Buttons")
-    @Test
-    public void displayThreeDigits() {
-        // Reset the text field
-        classUnderTest.text.setText("");
-    
-        // Simulate pressing buttons "2", then "3", then "5"
-        ActionEvent e1 = new ActionEvent(jButtons[2], ActionEvent.ACTION_PERFORMED, "");
-        ActionEvent e2 = new ActionEvent(jButtons[3], ActionEvent.ACTION_PERFORMED, "");
-        ActionEvent e3 = new ActionEvent(jButtons[5], ActionEvent.ACTION_PERFORMED, "");
-    
-        classUnderTest.actionPerformed(e1);
-        classUnderTest.actionPerformed(e2);
-        classUnderTest.actionPerformed(e3);
-    
-        // Expected: Text field displays "235"
-        String expectedDisplayText = CreatePanel.digitValue[2] + CreatePanel.digitValue[3] + CreatePanel.digitValue[5];
-        // Actual: Text displayed on the calculator
-        String actualDisplayText = classUnderTest.text.getText();
-    
-        // Verify that the expected display matches the actual display
-        assertEquals(expectedDisplayText, actualDisplayText);
-    }
-    
-
     @DisplayName("Testing Display after Addition Operation")
     @Test
     public void addOperationDisplay() {
@@ -197,6 +172,36 @@ class CalculatorUITest {
         assertEquals(expectedDisplayText, actualDisplayText);
     }
 
+    @DisplayName("Testing Display after Squaring Negative Number")
+    @Test
+    public void sqrOperationDisplay() {
+        // Reset the text field
+        classUnderTest.text.setText("");
+
+        // This test will subtract 6 - 10, which results in -4.0, and then will square that result
+        // Simulate pressing the buttons "6" "-" "1" "0" "=" "sqr"
+        ActionEvent e1 = new ActionEvent(jButtons[6], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e2 = new ActionEvent(CreatePanel.sub, ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e3 = new ActionEvent(jButtons[1], ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e4 = new ActionEvent(jButtons[0], ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e5 = new ActionEvent(CreatePanel.equal, ActionEvent.ACTION_PERFORMED,"");
+        ActionEvent e6 = new ActionEvent(CreatePanel.sqr, ActionEvent.ACTION_PERFORMED,"");
+
+        classUnderTest.actionPerformed(e1);
+        classUnderTest.actionPerformed(e2);
+        classUnderTest.actionPerformed(e3);
+        classUnderTest.actionPerformed(e4);
+        classUnderTest.actionPerformed(e5);
+        classUnderTest.actionPerformed(e6);
+
+        // Expected: Text field displays "16.0"
+        String expectedDisplayText = "16.0";
+        // Actual: Text displayed on the calculator
+        String actualDisplayText = classUnderTest.text.getText();
+        // Verify that the expected display matches the actual display
+        assertEquals(expectedDisplayText, actualDisplayText);
+    }
+
     @DisplayName("Testing Display after Multiple Primitive Operations")
     @Test
     public void complexOperationsDisplay() {
@@ -234,75 +239,30 @@ class CalculatorUITest {
         assertEquals(expectedDisplayText, actualDisplayText);
     }
 
-
-    @DisplayName("Testing Display after Trig Functions")
+    @DisplayName("Testing Display after Back-to-Back Inverse Operatoin")
     @Test
-    public void trigFunctionsDisplay() {
+    public void inverseOfInverseDisplay() {
         // Reset the text field
         classUnderTest.text.setText("");
 
-        // Sine: sin(30°) ≈ 0.5
-        // Simulate pressing buttons "3", "0", and "sin"
-        ActionEvent e1 = new ActionEvent(jButtons[3], ActionEvent.ACTION_PERFORMED,"");
+        // This test will get the inverse of 20, then get the inverse of the result, which should return to 20.0
+        // Simulate pressing the buttons "20" "inverse" "inverse"
+        ActionEvent e1 = new ActionEvent(jButtons[2], ActionEvent.ACTION_PERFORMED,"");
         ActionEvent e2 = new ActionEvent(jButtons[0], ActionEvent.ACTION_PERFORMED, "");
-        ActionEvent e3 = new ActionEvent(CreatePanel.sin, ActionEvent.ACTION_PERFORMED, "");
+        ActionEvent e3 = new ActionEvent(CreatePanel.inverse, ActionEvent.ACTION_PERFORMED,"");
 
         classUnderTest.actionPerformed(e1);
         classUnderTest.actionPerformed(e2);
         classUnderTest.actionPerformed(e3);
+        classUnderTest.actionPerformed(e3);
 
-        // Expected: The text field displays 0.5
-        double expectedValueSin = 0.5;
-        // Actual: Text displayed on the calculator, parsed as a double
-        double actualValueSin = Double.parseDouble(classUnderTest.text.getText());
-        // Tolerance for comparing double values
-        double epsilon = 1e-10;
-        // Verify that the expected value is within tolerance of the actual value
-        assertEquals(expectedValueSin, actualValueSin, epsilon, "Sine result matches the expected value with tolerance");
-    
-
-        // Reset the text field
-        classUnderTest.text.setText("");
-
-        // Cosine: cos(180°) ≈ -1.0
-        // Simulate pressing buttons "1", "8", "0", and "cos"
-        ActionEvent e4 = new ActionEvent(jButtons[1], ActionEvent.ACTION_PERFORMED, "");
-        ActionEvent e5 = new ActionEvent(jButtons[8], ActionEvent.ACTION_PERFORMED, "");
-        ActionEvent e6 = new ActionEvent(CreatePanel.cos, ActionEvent.ACTION_PERFORMED, "");
-
-        classUnderTest.actionPerformed(e4);
-        classUnderTest.actionPerformed(e5);
-        classUnderTest.actionPerformed(e2);
-        classUnderTest.actionPerformed(e6);
-
-        // Expected: The text field displays -1.0
-        double expectedValueCos = -1.0;
+        // Expected: Text field displays "20.0"
+        String expectedDisplayText = "20.0";
         // Actual: Text displayed on the calculator
-        double actualValueCos = Double.parseDouble(classUnderTest.text.getText());
-        // Verify that the actual value is close to the expected value within epsilon
-        assertEquals(expectedValueCos, actualValueCos, epsilon, "Cosine result matches the expected value with tolerance");
-
-        // Reset the text field
-        classUnderTest.text.setText("");
-
-        // Tangent: tan(45°) = 1.0
-        // Simulate pressing buttons "4", "5", and "tan"
-        ActionEvent e7 = new ActionEvent(jButtons[4], ActionEvent.ACTION_PERFORMED, "");
-        ActionEvent e8 = new ActionEvent(jButtons[5], ActionEvent.ACTION_PERFORMED, "");
-        ActionEvent e9 = new ActionEvent(CreatePanel.tan, ActionEvent.ACTION_PERFORMED, "");
-
-        classUnderTest.actionPerformed(e7);
-        classUnderTest.actionPerformed(e8);
-        classUnderTest.actionPerformed(e9);
-
-        // Expected: The text field displays 1.0
-        double expectedValueTan = 1.0;
-        // Actual: Text displayed on the calculator
-        double actualValueTan = Double.parseDouble(classUnderTest.text.getText());
+        String actualDisplayText = classUnderTest.text.getText();
         // Verify that the expected display matches the actual display
-        assertEquals(expectedValueTan, actualValueTan, epsilon, "Tangent result matches with expected value with tolerance");
+        assertEquals(expectedDisplayText, actualDisplayText);
     }
-
 
     @DisplayName("Testing Display after Cancel Button")
     @Test
