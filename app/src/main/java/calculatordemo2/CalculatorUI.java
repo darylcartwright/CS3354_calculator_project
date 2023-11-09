@@ -36,7 +36,7 @@ public class CalculatorUI implements ActionListener {
 		mainPanel = CreatePanel.createMainPanel();
 		calc = new Calculator();
 		text = CreatePanel.text;
-		FRAME_WIDTH = 600;
+		FRAME_WIDTH = 500;
 		FRAME_HEIGHT = 700;
 	}
 

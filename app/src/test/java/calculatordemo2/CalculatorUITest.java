@@ -24,7 +24,7 @@ class CalculatorUITest {
         CreatePanel.createMainPanel();
         CreatePanel.createTrigPanel();
         CreatePanel.createDigitPanel();
-        CreatePanel.createCancelPanel();
+        CreatePanel.createZeroCancelPanel();
         CreatePanel.createBasicFunctionPanel();
         CreatePanel.createPrimitiveOperationPanel();
         classUnderTest = new CalculatorUI();

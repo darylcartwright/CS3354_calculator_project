@@ -26,7 +26,7 @@ public class CreateButton extends JButton {
         button.setForeground(Color.BLACK);
         button.setOpaque(true);
         button.setBorderPainted(false);
-        button.setPreferredSize(new Dimension(100, 100));
+        button.setPreferredSize(new Dimension(100, 80));
         
         return button;
     }
@@ -67,7 +67,7 @@ public class CreateButton extends JButton {
         button.setForeground(Color.WHITE);
         button.setOpaque(true);
         button.setBorderPainted(false);
-        button.setPreferredSize(new Dimension(200, 100));
+        button.setPreferredSize(new Dimension(100, 100));
         return button;
     }
 }

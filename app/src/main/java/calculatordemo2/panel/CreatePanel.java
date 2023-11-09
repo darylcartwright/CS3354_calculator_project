@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Dimension;
 
 import javax.swing.JTextArea;
@@ -21,39 +22,50 @@ public class CreatePanel {
     public static JButton cancel;
     public static JTextArea text;
 
-    public static JPanel createDigitPanel() {
-        JPanel digitPanel = new JPanel(new GridLayout(4, 3, 0, 0)); 
+    public static JPanel createOneToNinePanel() {
+        JPanel oneToNinePanel = new JPanel(new GridLayout(3, 3, 0, 0)); 
     
         for (int i = 1; i <= 9; i++) {
             digitButtons[i] = CreateButton.createDigitButton(digitValue[i]);
         }
 
-        digitPanel.add(digitButtons[7]);
-        digitPanel.add(digitButtons[8]);
-        digitPanel.add(digitButtons[9]);
-        digitPanel.add(digitButtons[4]);
-        digitPanel.add(digitButtons[5]);
-        digitPanel.add(digitButtons[6]);
-        digitPanel.add(digitButtons[1]);
-        digitPanel.add(digitButtons[2]);
-        digitPanel.add(digitButtons[3]);
+        oneToNinePanel.add(digitButtons[7]);
+        oneToNinePanel.add(digitButtons[8]);
+        oneToNinePanel.add(digitButtons[9]);
+        oneToNinePanel.add(digitButtons[4]);
+        oneToNinePanel.add(digitButtons[5]);
+        oneToNinePanel.add(digitButtons[6]);
+        oneToNinePanel.add(digitButtons[1]);
+        oneToNinePanel.add(digitButtons[2]);
+        oneToNinePanel.add(digitButtons[3]);
     
-        JPanel zeroPanel = createZeroPanel();
-        digitPanel.add(zeroPanel);
+        return oneToNinePanel;
+    }
 
+    public static JPanel createDigitPanel() {
+        JPanel digitPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        JPanel oneToNinePanel = createOneToNinePanel();
+        JPanel zeroCancelPanel = createZeroCancelPanel();
 
-        JPanel cancelPanel = createCancelPanel();
-        digitPanel.add(cancelPanel);
+        digitPanel.add(oneToNinePanel);
+        digitPanel.add(zeroCancelPanel);
     
         return digitPanel;
     }
 
-    public static JPanel createZeroPanel() {
-        JPanel zeroPanel = new JPanel();
+
+
+    public static JPanel createZeroCancelPanel() {
+        JPanel zeroCancelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         zero = CreateButton.createZeroButton(digitValue[0]);
         digitButtons[0] = zero;
-        zeroPanel.add(zero);
-        return zeroPanel;
+
+        cancel = CreateButton.createCancelButton("C");
+
+        zeroCancelPanel.add(zero);
+        zeroCancelPanel.add(cancel);
+
+        return zeroCancelPanel;
     }
     
 
@@ -111,16 +123,6 @@ public class CreatePanel {
         basicFunctionPanel.add(inverse);
 
         return basicFunctionPanel;
-    }
-
-    public static JPanel createCancelPanel() {
-        JPanel cancelPanel = new JPanel();
-
-        cancel = CreateButton.createCancelButton("C");
-
-        cancelPanel.add(cancel);
-
-        return cancelPanel;
     }
 
     public static JPanel createButtonPanel() {
