@@ -15,6 +15,9 @@ import calculatordemo2.panel.CreatePanel;
 /**
  * CalculatorUI class that creates and adds buttons, event handling for the buttons, and calls calculator
  * methods and functions for logic when necessary
+ * 
+ * This class implements the ActionListener interface to handle button click events.
+ * 
  * @author Soria, Steckler, Tesic, Metsis
  */
 
@@ -22,9 +25,9 @@ public class CalculatorUI implements ActionListener {
 	private final JFrame frame;
     private final JPanel mainPanel;
     private final Calculator calc;
-	public final int FRAME_WIDTH;
-	public final int FRAME_HEIGHT;
-	// Added for testing purpose
+	private final int FRAME_WIDTH;
+	private final int FRAME_HEIGHT;
+	private static final int NUM_DIGITS = 10;
 	final JTextArea text;
 
 	/**
@@ -38,6 +41,7 @@ public class CalculatorUI implements ActionListener {
 		text = CreatePanel.text;
 		FRAME_WIDTH = 500;
 		FRAME_HEIGHT = 625;
+
 	}
 
 	/**
@@ -46,8 +50,6 @@ public class CalculatorUI implements ActionListener {
 	public void init() {
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		//Added seperate action listener methods
 		
         addDigitButtonListeners();
         addActionListenersForOperators();
@@ -57,13 +59,19 @@ public class CalculatorUI implements ActionListener {
 
 	}
 
+	/**
+	 * Adds action listeners for digit buttons
+	 */
 	private void addDigitButtonListeners() {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < NUM_DIGITS; i++) {
 			JButton digitButton = CreatePanel.digitButtons[i];
 			digitButton.addActionListener(this);
 		}
 	}
 
+	/**
+	 * Adds action listeners for operator buttons
+	 */
 	private void addActionListenersForOperators() {
 		JButton[] operationButtons = {CreatePanel.add, CreatePanel.sub, CreatePanel.mult, CreatePanel.div, CreatePanel.equal, 
 										CreatePanel.sqr, CreatePanel.sqrRt, CreatePanel.inverse,
@@ -78,82 +86,122 @@ public class CalculatorUI implements ActionListener {
 
 	/**
 	 * Event handling implementation for Calculator button pressing
-	 * @param e
+	 * @param e ActionEvent triggered by button click.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		String currentText = text.getText();
-	
-		// Handle digit buttons (buttons 0 to 9)
+
+	    // Handle digit buttons (buttons 0 to 9)
 		for (int i = 0; i < 10; i++) {
 			JButton digitButton = CreatePanel.digitButtons[i];
 			if (source == digitButton) {
 				String digitValue = CreatePanel.digitValue[i];
-				currentText = text.getText();
 				text.setText(currentText + digitValue);
 				return; // Exit the method after handling the button click
 			}
 		}
+	
+    	// Handle other buttons
+    	if (source instanceof JButton) {
+			JButton button = (JButton) source;
 
-		// Some of the following operations have the text cleared afterwards to prevent accidental appending of digits.
-		if (source == CreatePanel.add) {
-			writer(calc.twoOpCaller(Calculator.twoOperator.add, reader()));
-			text.setText(""); 
-		}
-		if (source == CreatePanel.sub) {
-			writer(calc.twoOpCaller(Calculator.twoOperator.subtract, reader()));
-			text.setText(""); 
-		}
-		if (source == CreatePanel.mult) {
-			writer(calc.twoOpCaller(Calculator.twoOperator.multiply, reader()));
-			text.setText("");
-		}
-		if (source == CreatePanel.div) {
-			writer(calc.twoOpCaller(Calculator.twoOperator.divide, reader()));
-			text.setText("");
-		}
-		if (source == CreatePanel.sqr) {
-			writer(calc.calcScience(Calculator.singleOperator.square, reader()));
-		}
-		if (source == CreatePanel.sqrRt) {
-			writer(calc.calcScience(Calculator.singleOperator.squareRoot, reader()));
-		}
-		if (source == CreatePanel.inverse) {
-			writer(calc.calcScience(Calculator.singleOperator.oneDividedBy, reader()));
-		}
-		if (source == CreatePanel.cos) {
-			writer(calc.calcScience(Calculator.singleOperator.cos, reader()));
-		}
-		if (source == CreatePanel.sin) {
-			writer(calc.calcScience(Calculator.singleOperator.sin, reader()));
-		}
-		if (source == CreatePanel.tan) {
-			writer(calc.calcScience(Calculator.singleOperator.tan, reader()));
-		}
-		if (source == CreatePanel.arccos) {
-			writer(calc.calcScience(Calculator.singleOperator.arccos, reader()));
-		}
-		if (source == CreatePanel.arcsin) {
-			writer(calc.calcScience(Calculator.singleOperator.arcsin, reader()));
-		}
-		if (source == CreatePanel.arctan) {
-			writer(calc.calcScience(Calculator.singleOperator.arctan, reader()));
-		}
-		if (source == CreatePanel.equal) {
-			writer(calc.calculateEqual(reader()));
-		}
-		if (source == CreatePanel.cancel) {
-			writer(calc.reset());
-		}
+        	if (button == CreatePanel.add || button == CreatePanel.sub || button == CreatePanel.mult || button == CreatePanel.div) {
+				handleOperatorButtonClick(button);
+			} else if (button == CreatePanel.sqr || button == CreatePanel.sqrRt || button == CreatePanel.inverse ||
+					   button == CreatePanel.cos || button == CreatePanel.sin || button == CreatePanel.tan ||
+					   button == CreatePanel.arccos || button == CreatePanel.arcsin || button == CreatePanel.arctan) {
+	 			handleScienceButtonClick(button);
+ 			} else if (button == CreatePanel.equal) {
+            	handleEqualButtonClick();
+        	} else if (button == CreatePanel.cancel) {
+            	handleCancelButtonClick();
+        	}
+    	}
 
-		// for easy continued calculations/copy
-		text.selectAll();
+    	// For easy continued calculations/copy
+    	text.selectAll();
+	}
+	
+	
+	// Helper method for handling operator buttons
+	private void handleOperatorButtonClick(JButton button) {
+		// Get the operator type from the button and current text value
+		Calculator.twoOperator operator = getOperatorTypeFromButton(button);
+		Double value = reader();
 
+		// Perform the two-operator calculation, update the display, and clear the text field
+		writer(calc.twoOpCaller(operator, value));
+		text.setText("");
+	}
+	
+	// Helper method for handling science buttons
+	private void handleScienceButtonClick(JButton button) {
+		// Get the science type from the button and current text value
+		Calculator.singleOperator operator = getScienceTypeFromButton(button);
+		Double value = reader();
+
+		// Perform the scientific calculation, update the display, and clear the text field
+		writer(calc.calcScience(operator, value));
 	}
 
+	// Helper method for handling equal button
+	private void handleEqualButtonClick() {
+		// Calculate the result for the current expression and update the display
+		writer(calc.calculateEqual(reader()));
+	}
+	
+	// Helper method for handling cancel button
+	private void handleCancelButtonClick() {
+		// Reset the calculator and update the display
+		writer(calc.reset());
+	}
+
+	// Helper method to determine the two-operator type based on the button source
+	private Calculator.twoOperator getOperatorTypeFromButton(Object source) {
+		if (source == CreatePanel.add) {
+			return Calculator.twoOperator.add;
+		} else if (source == CreatePanel.sub) {
+			return Calculator.twoOperator.subtract;
+		} else if (source == CreatePanel.mult) {
+			return Calculator.twoOperator.multiply;
+		} else if (source == CreatePanel.div) {
+			return Calculator.twoOperator.divide;
+		} else {
+			throw new IllegalArgumentException("Invalid operator button: " + source);
+		}
+	}
+
+	// Helper method to determine the scientific operator type based on the button source
+	private Calculator.singleOperator getScienceTypeFromButton(Object source) {
+		if (source == CreatePanel.sqr) {
+			return Calculator.singleOperator.square;
+		} else if (source == CreatePanel.sqrRt) {
+			return Calculator.singleOperator.squareRoot;
+		} else if (source == CreatePanel.inverse) {
+			return Calculator.singleOperator.oneDividedBy;
+		} else if (source == CreatePanel.cos) {
+			return Calculator.singleOperator.cos;
+		} else if (source == CreatePanel.sin) {
+			return Calculator.singleOperator.sin;
+		} else if (source == CreatePanel.tan) {
+			return Calculator.singleOperator.tan;
+		} else if (source == CreatePanel.arccos) {
+			return Calculator.singleOperator.arccos;
+		} else if (source == CreatePanel.arcsin) {
+			return Calculator.singleOperator.arcsin;
+		} else if (source == CreatePanel.arctan) {
+			return Calculator.singleOperator.arctan;
+		} else {
+			throw new IllegalArgumentException("Invalid science button: " + source);
+		}
+	}
+	
+
 	/**
-	 * Helper function that gets the texfield area and updates the number input
+	 * Helper function that gets the text field area and updates the number input
+	 * 
 	 * @return the updated number
 	 */
 	public Double reader() {
@@ -167,7 +215,7 @@ public class CalculatorUI implements ActionListener {
 
 	/**
 	 * Helper function that sets the textfield with the number, and avoids NaN issues
-	 * @param num
+	 * @param num the number to be displayed
 	 */
 	public void writer(final Double num) {
 		if (Double.isNaN(num)) {
