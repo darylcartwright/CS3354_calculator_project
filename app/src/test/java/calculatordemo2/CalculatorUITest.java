@@ -246,7 +246,7 @@ class CalculatorUITest {
         classUnderTest.text.setText("");
 
         // This test will get the inverse of 20, then get the inverse of the result, which should return to 20.0
-        // Simulate pressing the buttons "20" "inverse" "inverse"
+        // Simulate pressing the buttons "2" "0" "inverse" "inverse"
         ActionEvent e1 = new ActionEvent(jButtons[2], ActionEvent.ACTION_PERFORMED,"");
         ActionEvent e2 = new ActionEvent(jButtons[0], ActionEvent.ACTION_PERFORMED, "");
         ActionEvent e3 = new ActionEvent(CreatePanel.inverse, ActionEvent.ACTION_PERFORMED,"");

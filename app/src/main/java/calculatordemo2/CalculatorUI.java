@@ -91,17 +91,15 @@ public class CalculatorUI implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		String currentText = text.getText();
 
-	    // Handle digit buttons (buttons 0 to 9)
-		for (int i = 0; i < 10; i++) {
-			JButton digitButton = CreatePanel.digitButtons[i];
-			if (source == digitButton) {
-				String digitValue = CreatePanel.digitValue[i];
-				text.setText(currentText + digitValue);
-				return; // Exit the method after handling the button click
-			}
-		}
+    	// Handle digit buttons (buttons 0 to 9)
+    	for (int i = 0; i < 10; i++) {
+        	JButton digitButton = CreatePanel.digitButtons[i];
+        	if (source == digitButton) {
+            	handleDigitButtonClick(digitButton);
+            	return; // Exit the method after handling the button click
+        	}
+    	}
 	
     	// Handle other buttons
     	if (source instanceof JButton) {
@@ -124,6 +122,12 @@ public class CalculatorUI implements ActionListener {
     	text.selectAll();
 	}
 	
+	// Helper method for handling digit buttons
+	private void handleDigitButtonClick(JButton button) {
+    	String digitValue = button.getText();
+    	String currentText = text.getText();
+    	text.setText(currentText + digitValue);
+	}
 	
 	// Helper method for handling operator buttons
 	private void handleOperatorButtonClick(JButton button) {

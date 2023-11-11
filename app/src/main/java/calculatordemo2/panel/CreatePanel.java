@@ -75,7 +75,7 @@ public class CreatePanel {
      * Includes the 1 - 9 buttons and the 0 and C button
      * @return The panel with all digit buttons.
      */
-        public static JPanel createDigitPanel() {
+    public static JPanel createDigitPanel() {
         JPanel digitPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         JPanel oneToNinePanel = createOneToNinePanel();
         JPanel zeroCancelPanel = createZeroCancelPanel();
