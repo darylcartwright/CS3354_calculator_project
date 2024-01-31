@@ -11,6 +11,7 @@ package calculatordemo2;
  *
  * @author Soria, Steckler, Tesic, Metsis
  */
+
 public class CalculatorMain {
 
 	public static void main(String[] args) {

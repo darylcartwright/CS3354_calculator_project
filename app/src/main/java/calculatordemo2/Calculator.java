@@ -15,17 +15,17 @@ public class Calculator{
 	}
 
 	public enum singleOperator {
-		square, squareRoot, oneDevidedBy, cos, sin, tan
+		square, squareRoot, oneDividedBy, cos, sin, tan, arccos, arcsin, arctan
 	}
 
-	private Double num1, num2;
-	private twoOperator mode = twoOperator.normal;
+	public Double num1, num2;
+	twoOperator mode = twoOperator.normal;
 
 	/**
 	 * The final call in enumeration that returns the specificed operation result
 	 * @return returns the called operation's result
 	 */
-	private Double twoOpOperations() {
+	public Double twoOpOperations() {
 		if (mode == twoOperator.normal) {
 			return num2;
 		}
@@ -95,23 +95,33 @@ public class Calculator{
 	 * @return
 	 */
 	public Double calcScience(singleOperator newMode, Double num) {
+
 		if (newMode == singleOperator.square) {
 			return num * num;
 		}
 		if (newMode == singleOperator.squareRoot) {
 			return Math.sqrt(num);
 		}
-		if (newMode == singleOperator.oneDevidedBy) {
+		if (newMode == singleOperator.oneDividedBy) {
 			return 1 / num;
 		}
 		if (newMode == singleOperator.cos) {
-			return Math.cos(num);
+			return Math.cos(Math.toRadians(num));
 		}
 		if (newMode == singleOperator.sin) {
-			return Math.sin(num);
+			return Math.sin(Math.toRadians(num));
 		}
 		if (newMode == singleOperator.tan) {
-			return Math.tan(num);
+			return Math.tan(Math.toRadians(num));
+		}
+		if (newMode == singleOperator.arccos) {
+			return Math.toDegrees(Math.acos(num));
+		}
+		if (newMode == singleOperator.arcsin) {
+			return Math.toDegrees(Math.asin(num));
+		}
+		if (newMode == singleOperator.arctan) {
+			return Math.toDegrees(Math.atan(num));
 		}
 		// never reach
 		throw new Error();
